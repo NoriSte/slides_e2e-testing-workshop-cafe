@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>E2E testing meetup for CaFE</title>
+
+		<meta name="description" content="In March 2019 I had a talk for the CaFE community in Como (https://www.meetup.com/it-IT/Como-and-Frontend-CaFE/events/259556783/). The talk aimed to introduce the attendees to the amazing world of browser automation, mostly for E2E testing but some showed examples were about web scraping too.">
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+
+
+	</head>
+	<body class="reveal-viewport theme-font-montserrat theme-color-silver-green">
+		<div class="reveal">
+			<div class="slides">
+				<section data-id="b0a408670a4fa93f342024658b93493b" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="cacbefe7099add8e81e877c6c25d34ee"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="color: rgb(15, 192, 120); z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2><strong>E2E testing with Puppeteer</strong></h2>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 202px; left: 77px; top: 40px;" data-block-id="2cb18f6a8122b84c8be9130f7d1b5cc3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p style="text-align:left"><span style="font-size:1.0em">Organised by:</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 202px; left: 678px; top: 40px;" data-block-id="e1d6fb0cc72cc6dd0b76b2e5346d9f79"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17; text-align: right;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p><span style="font-size:1.0em">Hosted by:</span></p>
+</div></div>
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 800px; left: 80px; top: 367px;" data-block-id="13d99f9c4a7ed032e6591a64cbfa0118"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p style="text-align:left">Level: basic</p>
+
+<p style="text-align:left">Repository: <a href="https://github.com/NoriSte/cafe-meetup-e2e-testing-with-puppeteer" target="_blank">https://github.com/NoriSte/cafe-meetup-e2e-testing-with-puppeteer</a></p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 202px; left: 678px; top: 549px;" data-block-id="0c6ef234514ea52b5aa9845157edda5a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17; text-align: right;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p>13/03/2019</p>
+</div></div>
+
+
+<div class="sl-block" data-block-type="image" data-block-id="376ebec95c5f63eeb4c9e541f680a2d1" style="min-width: 4px; min-height: 4px; width: 210px; height: 89px; left: 80px; top: 70px;"><a class="sl-block-content" style="z-index: 20;" href="https://www.meetup.com/it-IT/Como-and-Frontend-CaFE/" target="_blank"><img data-natural-width="624" data-natural-height="265" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/d33138493da9189a3306655c9d942399.jpg"></a></div>
+<div class="sl-block" data-block-type="image" data-block-id="086f7db750b70164805cc6289bc10184" style="min-width: 4px; min-height: 4px; width: 194px; height: 64px; left: 686px; top: 76px;"><a class="sl-block-content" style="z-index: 21;" href="https://gdscom.it/it/" target="_blank"><img data-natural-width="1024" data-natural-height="338" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/8b41f8190d8d63bf74ab80de58569fd1.png"></a></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 200px; height: 69px; left: 456px; top: 521px;" data-block-id="5f15e95a9dc1d1badd01ea4d9aba26d8"><a class="sl-block-content" style="z-index: 23;" href="https://conio.com" target="_blank"><img data-natural-width="800" data-natural-height="276" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/41b9aee2514ac9d876c6b4a0c92e9c8e.svg"></a></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 159px; height: 159px; left: 400px; top: 476px;" data-block-id="0240f714319a709b7ed8b3d2e84c70da"><a class="sl-block-content" data-shape-type="circle" data-shape-fill-color="rgb(15, 192, 120)" data-shape-stretch="true" style="z-index: 22;" href="https://conio.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 159 159"><ellipse rx="79.5" ry="79.5" cx="79.5" cy="79.5" class="shape-element" fill="rgb(15, 192, 120)"></ellipse></svg></a></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 261px; left: 80px; top: 526px;" data-block-id="e5782fcdcffd0a5f25d119bf409cff2e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 24; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p style="text-align:left">Stefano Magni (<a href="https://twitter.com/NoriSte" target="_blank">@NoriSte</a>)</p>
+
+<p style="text-align:left">Front-end Developer for</p>
+</div></div></section><section data-id="3304d31340de259bd26fbdc0bd713780" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="e36db69037650c74567911a241d5d2af"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>I'm <span style="color:#FF8C00"><strong>Stefano Magni </strong></span>(@NoriSte)</h2>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="9ff161e733992f4d12fe746f7b3d5df6" style="min-width: 4px; min-height: 4px; width: 280px; height: 280px; left: 80px; top: 350px;"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="853" data-natural-height="853" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/eb9b426ac0cd8080722ef6d834097711.jpg"></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 511px; left: 400px; top: 350px;" data-block-id="d457c096bcbc2450b4e8f1e6bf8f151e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<h3 style="text-align:left">I work for <a href="https://conio.com/it/" target="_blank">Conio</a>, a bitcoin startup based in Milan.</h3>
+
+<h3 style="text-align:left"> </h3>
+
+<h3 style="text-align:left">You can find me on <a href="https://twitter.com/NoriSte" target="_blank">Twitter</a>, <a href="https://github.com/NoriSte" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/noriste/detail/recent-activity/shares/" target="_blank">LinkedIn</a>.</h3>
+</div></div></section><section class="stack" data-id="436d126ee2920e006c419d0b87b778d7"><section data-id="ad1fd8172f56874bb90171e7f4e2adc2" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="height: auto; width: 360px; left: 80px; top: 280px;" data-block-id="f016eaf0ec195f66c54f12dec072beae"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Long story short:</h3>
+
+<h3>at the beginning there was the <span style="color:#FF8C00"><strong>callback hell</strong></span>...</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="6e334bda8c54ac0b34b176e71f25aa01"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>What is <span style="color:#FF8C00"><strong>async/await</strong></span>?</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 400px; height: 300px; left: 480px; top: 280px;" data-block-id="74b3caf7ec1c0b64583f2bb11d7a718a"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 15;"><pre class="javascript"><code>function logAll(){
+  logWithCallback("A", () =&gt; {
+    logWithCallback("B", () =&gt; {
+      logWithCallback("C", () =&gt; {
+        logWithCallback("D", () =&gt; {});
+      });
+    });
+  });
+}
+logAll();</code></pre></div></div></section><section data-id="a29f6075071ffea85f4bcab844b1d279" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="height: auto; width: 360px; left: 80px; top: 280px;" data-block-id="bb901401b88b295f40d94f9f9afd8a94"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>... Then the <span style="color:#FF8C00"><strong>promises</strong></span> come...</h3>
+
+<p> </p>
+
+<p>• better readability</p>
+
+<p>• better control</p>
+
+<p>• easier error catching</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="f4719ccf58145c7ccc37f7b0d0383c2e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>What is <span style="color:#FF8C00"><strong>async/await</strong></span>?</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 400px; height: 300px; left: 480px; top: 280px;" data-block-id="1ba1f9478e4318a32e90b5bf86fff56c"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 15;"><pre class="javascript"><code>function logAll(){
+  logWithPromise("A")
+  .then(() =&gt; logWithPromise("B"));
+  .then(() =&gt; logWithPromise("C"));
+  .then(() =&gt; logWithPromise("D"));
+}
+logAll();</code></pre></div></div></section><section data-id="ffd6956bb738252b581ac5e6c46c2355" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="height: auto; width: 360px; left: 80px; top: 280px;" data-block-id="e0854287914d4c20dc802e5ad8104a4d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>... Then you can now <span style="color:#FF8C00"><strong>await</strong></span> a promise...</h3>
+
+<p> </p>
+
+<p>• even better readability</p>
+
+<p>• more concise code</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="b27702b8a01bbc73d6a3e52cf50dbfec"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>What is <span style="color:#FF8C00"><strong>async/await</strong></span>?</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 400px; height: 300px; left: 480px; top: 280px;" data-block-id="8839f1a663a27296aaa2125b80d94831"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 15;"><pre class="javascript"><code>async function logAll(){
+  await logWithPromise("A"));
+  await logWithPromise("B"));
+  await logWithPromise("C"));
+  await logWithPromise("D"));
+}
+logAll();</code></pre></div></div></section><section data-id="0c666d8efb381ad4dd0f2f567a6244b3" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="height: auto; width: 360px; left: 80px; top: 300px;" data-block-id="1e6cbb8bdfc6eb51aa8547cfd765c118"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>from callbacks...</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="3244ad0bd1bae0e6fff5649c7f04c374"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>What is <span style="color:#FF8C00"><strong>async/await</strong></span>?</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 320px; height: 220px; left: 560px; top: 410px;" data-block-id="cff2f7d3a52528d59bf6f12e022e208e"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 17;"><pre class="javascript"><code>async function logAll(){
+  await logWithPromise("A");
+  await logWithPromise("B");
+  await logWithPromise("C");
+  await logWithPromise("D");
+}
+logAll();</code></pre></div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 400px; height: 210px; left: 80px; top: 420px;" data-block-id="82bc881134d9cd351a0ae352d1768355"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 18;"><pre class="javascript"><code>function logAll(){
+  logWithCallback("A", () =&gt; {
+    logWithCallback("B", () =&gt; {
+      logWithCallback("C", () =&gt; {
+        logWithCallback("D", () =&gt; {});
+      });
+    });
+  });
+}
+logAll();</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 360px; left: 560px; top: 280px;" data-block-id="01c4b6d96403abf1cf729a0e7b156ab9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>... to waiting promises</h3>
+</div></div></section></section><section class="stack" data-id="fa522f68f4e3f8cd4404595149fe6be5"><section data-id="10f2fd88112ad51ceef2563cc3f6d07c" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 280px;" data-block-id="96ff6d13c8c40b5b1da8dec8061eddf9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Jest is a zero-configuration <span style="color:#FF8C00"><strong>testing framework</strong></span>.</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="e78a774dcb7ecccf3c358e8a867c489f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>What is <span style="color:#FF8C00"><strong>Jest</strong></span>?</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 80px; top: 560px;" data-block-id="c888007d7f505f0024f59ee30f03a8d4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; color: rgb(0, 0, 0);" data-gramm_id="7ffee63c-8a3e-53dd-4622-e92d9888d1b2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://jestjs.io" target="_blank">https://jestjs.io</a></pre>
+</div></div></section><section data-id="3e2c45c45bc92c8bb64ff35e95640cdd" data-background-color="#ffffff"><div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 522px; height: 490px; left: 38px; top: 140px;" data-block-id="382bc1db6fc8868878ee032b3e301666"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 14;"><pre class="javascript"><code>beforeAll(async () =&gt; {
+  // code to be run before the whole test suite
+});
+beforeEach(async () =&gt; {
+  // code to be run before every test
+});
+afterAll(async () =&gt; {
+  // code to be run after the whole test suite
+});
+
+describe('Description 1', () =&gt; {
+  test('Test 1', () =&gt; {
+      expect(1).toBe(1);
+  });
+  test('Test 2', () =&gt; {
+      expect('hello').not.toBe('world');
+  });
+
+  describe('Inner description', () =&gt; {
+    test('Inner test 1', () =&gt; {
+        expect({foo: 'bar'}).toEqual({foo: 'bar'});
+    });
+    test('Inner test 2', () =&gt; {
+        expect(0).toBeFalsy();
+    });
+  });
+});
+</code></pre></div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 283px; height: 490px; left: 597px; top: 140px;" data-block-id="687d908959352f88cd7c1cc095c99bad"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 15;"><pre class="bash"><code> PASS  ./test.js
+  Description 1
+    ✓ Test 1 (5ms)
+    ✓ Test 2 (1ms)
+    Inner description
+      ✓ Inner test 1 (2ms)
+      ✓ Inner test 2 (1ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        1.071s
+Ran all test suites.</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 491px; left: 38px; top: 70px;" data-block-id="ff038cdad160e8a1efd28af8e927ca56"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16; color: rgb(0, 0, 0);" data-gramm_id="7664a17c-edef-cd43-51ba-a0f0f3d0f38a" data-gramm="true" data-gramm_editor="true">
+<p style="text-align:left">test.js</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 239px; left: 597px; top: 70px;" data-block-id="4b7e8972778d4880df693b49fa41cb27"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; color: rgb(0, 0, 0);" data-gramm_id="db1aa043-7455-b8ba-a824-63196fc382cd" data-gramm="true" data-gramm_editor="true">
+<p style="text-align:left">result of $ jest</p>
+</div></div></section></section><section class="stack" data-id="e162f8afc1ffa6cb77bb8c1bc5201188"><section data-background-color="#ffffff" data-id="c64b43a450337a1de0bf795068187ed6"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="cfa5f89fd124df7125d8af56a7c2c2f4"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>What is <span style="color:#FF8C00"><strong>E2E testing</strong></span>
+</h2>
+
+<h2>(or UI testing)?</h2>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="dad15dd1fda4109f67efd5fafa66b8b7"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="68eb7d4917955e7d609cf9ad3f84bf5d"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2> </h2>
+
+<h3>From Wikipedia:</h3>
+
+<h3>End-to-end testing is a methodology used to <span style="color:#FF8C00"><strong>test whether the flow</strong></span> of an application <span style="color:#FF8C00"><strong>is performing as designed</strong> <strong>from start to finish</strong></span>.</h3>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="07c133bd6dfca09bdd694a4def08f00a"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="89032159fa90abe0875eef0ce714eec6"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>It is useful to <span style="color:#FF8C00"><strong>test</strong></span> your site/webapp/app in the same way your <span style="color:#FF8C00"><strong>real users</strong></span> consume it.</h3>
+</div></div>
+
+
+
+
+
+
+</section><section data-id="940b9c082f89d916fb0d2ce511ca2859" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="df3f8278d19d0c84d99443998c62a0b9"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>The user interactions are automated.</h3>
+
+<p> </p>
+
+<p>From the <span style="color:#FF8C00"><strong>Puppeteer.page.click</strong></span> API documentation:</p>
+
+<p><em>This method fetches an element with selector, <span style="color:#FF8C00"><strong>scrolls it into view</strong></span> if needed, and then uses page.mouse to click in the center of the element.</em></p>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="ebea2bc812c7f4b42f2dc2fbd0d6696c"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="5ae21a9d39ae903288861051823688fe"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>E2E tests are the only tool that can check if your website <span style="color:#FF8C00"><strong>really works</strong></span> or not.</h3>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="d37d45bd41878583ccbe84ac739e802f"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="1403693cbe157c91851f5ff5c418a32d"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>The most important thing:</h3>
+
+<h3>E2E tests are hosted in a <span style="color:#FF8C00"><strong>real browser</strong></span>.</h3>
+</div></div>
+
+
+
+
+
+
+</section></section><section class="stack" data-id="b84f42280c6d967dbba08bb7438f421a"><section data-background-color="#ffffff" data-id="bb73e31205bcc54107aa8dc9f9358afe"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 70px; height: auto;" data-block-id="07b53ad156a65564b56fc1783b44a1d5"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>What is <strong><a href="https://github.com/GoogleChrome/puppeteer" target="_blank"><span style="color:#FF8C00">Puppeteer</span></a></strong>?</h3>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-block-id="f2d5d1a3f97bc9e27bbc3178b4152269" style="min-width: 4px; min-height: 4px; width: 960px; height: 540px; left: 0px; top: 160px;"><a class="sl-block-content" style="z-index: 10;" href="https://github.com/GoogleChrome/puppeteer" target="_blank"><img data-natural-width="1280" data-natural-height="720" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/5465bf9a78d50a866dc529a31c158a0b.jpg"></a></div>
+</section><section data-background-color="#ffffff" data-id="edbae6e09c1e034a1a1f7e89d3c9bb62"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="a88baf3b1928062aff9b902822bb3480"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>Puppeteer is a <span style="color:#FF8C00"><strong>Node library</strong></span> which provides a <span style="color:#FF8C00"><strong>high-level API to control Chrome</strong></span> or Chromium over the DevTools Protocol.</h3>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="a14cb641f042825553ffd214799db896"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="20e3ddaeb3a18f78b229cea58b068e81"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>Puppeteer lets you control a Chrome instance and fire <span style="color:#FF8C00"><strong>user-like interactions</strong></span> (click, typing etc.) within the page.</h3>
+
+<p> </p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer" target="_blank">https://github.com/GoogleChrome/puppeteer</a></pre>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="8740a6513d11d2234a9b1f80d69207e1"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="c01388d6b13bb53dc0aa20c40c9684fd"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>It introduces the concept of <span style="color:#FF8C00"><strong>headless</strong></span><span style="color:#FFFF00"><strong> </strong></span>browser that is a full and standard browser that runs without a GUI.</h3>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="cc31de6a953c1fc96a9559babb534586">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-block-id="370a4864abd79f1042b2bc6e4401d983" style="min-width: 4px; min-height: 4px; width: 408px; height: 518px; left: 552px; top: 112px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="1050" data-natural-height="1334" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/58c787a58449bba95ece2a4ed064096a.jpg"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="69628eefc4c1a0f9bc6b4a03c7f58812" style="min-width: 4px; min-height: 4px; width: 476px; height: 518px; left: 1px; top: 112px;"><div class="sl-block-content" style="z-index: 13;"><img style="" data-natural-width="1226" data-natural-height="1334" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/ffa18659a92621c38e6edb516d353300.jpg"></div></div>
+
+<div class="sl-block" data-block-type="text" data-block-id="3bfacbf6cd57364820c63546da963459" style="height: auto; min-width: 30px; min-height: 30px; width: 193px; left: 99px; top: 539px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; color: rgb(255, 51, 102); background-color: rgb(255, 255, 0); font-size: 80%;" data-gramm_id="4a811d32-0134-1c38-8bef-4774e336c623" data-gramm="true" data-gramm_editor="true">
+<p>1: Node running the script</p>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 251px; height: 56px; left: 342px; top: 142px;" data-block-id="2d0e25384961011a51f32e949500474b"><div class="sl-block-style" style="z-index: 17; transform: rotate(360deg);"><div class="sl-block-content" data-shape-type="arrow-right" data-shape-fill-color="rgb(255, 51, 102)" data-shape-stretch="true" style="z-index: 17;" data-shape-stroke-color="#ffff00" data-shape-stroke-width="3"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 251 56"><defs><clippath id="shape-mask-1-1540398516175"><polygon points="0,16.8 125.5,16.8 125.5,0 251,28 125.5,56 125.5,39.199999999999996 0,39.199999999999996"></polygon></clippath></defs><polygon points="0,16.8 125.5,16.8 125.5,0 251,28 125.5,56 125.5,39.199999999999996 0,39.199999999999996" clip-path="url(#shape-mask-1-1540398516175)" class="shape-element" fill="rgb(255, 51, 102)" stroke="#ffff00" stroke-width="6"></polygon></svg></div></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 171px; left: 174px; top: 122px;" data-block-id="dccc1025c4f52a8446eb2c01574f710f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18; color: rgb(255, 51, 102); background-color: rgb(255, 255, 0); font-size: 80%;" data-gramm_id="4a811d32-0134-1c38-8bef-4774e336c623" data-gramm="true" data-gramm_editor="true">
+<p>2: Chromium launched with Puppeteer</p>
+</div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="b672ae9264bfbde1a029bccb4f7fa885" style="min-width: 4px; min-height: 4px; width: 436px; height: 151px; left: 42px; top: 463px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 14;" data-shape-stroke-color="#ff3366" data-shape-stroke-width="5"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 436 151"><defs><clippath id="shape-mask-2-1540398516180"><rect width="436" height="151" rx="0" ry="0"></rect></clippath></defs><rect width="436" height="151" rx="0" ry="0" clip-path="url(#shape-mask-2-1540398516180)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#ff3366" stroke-width="10"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 358px; height: 97px; left: 101px; top: 210px;" data-block-id="4fd64ea3b7a0b6e12ea8b8a0fcba8cce"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 16;" data-shape-stroke-color="#ff3366" data-shape-stroke-width="5"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 358 97"><defs><clippath id="shape-mask-3-1540398516183"><rect width="358" height="97" rx="0" ry="0"></rect></clippath></defs><rect width="358" height="97" rx="0" ry="0" clip-path="url(#shape-mask-3-1540398516183)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#ff3366" stroke-width="10"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 377px; height: 84px; left: 101px; top: 326px;" data-block-id="821352acf4112889aa246544568b14de"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 19;" data-shape-stroke-color="#ff3366" data-shape-stroke-width="5"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 377 84"><defs><clippath id="shape-mask-4-1540398516185"><rect width="377" height="84" rx="0" ry="0"></rect></clippath></defs><rect width="377" height="84" rx="0" ry="0" clip-path="url(#shape-mask-4-1540398516185)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#ff3366" stroke-width="10"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 131px; height: 56px; left: 455px; top: 396px;" data-block-id="a91aa30e2e9d98db8b9bc3ac96ba4c46"><div class="sl-block-style" style="z-index: 20; transform: rotate(28deg);"><div class="sl-block-content" data-shape-type="arrow-right" data-shape-fill-color="rgb(255, 51, 102)" data-shape-stretch="true" style="z-index: 20;" data-shape-stroke-color="#ffff00" data-shape-stroke-width="3"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 131 56"><defs><clippath id="shape-mask-5-1540398516188"><polygon points="0,16.8 65.5,16.8 65.5,0 131,28 65.5,56 65.5,39.199999999999996 0,39.199999999999996"></polygon></clippath></defs><polygon points="0,16.8 65.5,16.8 65.5,0 131,28 65.5,56 65.5,39.199999999999996 0,39.199999999999996" clip-path="url(#shape-mask-5-1540398516188)" class="shape-element" fill="rgb(255, 51, 102)" stroke="#ffff00" stroke-width="6"></polygon></svg></div></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 206px; left: 268px; top: 348px;" data-block-id="b2439499204fd0871248a8c69e3c06f9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 21; color: rgb(255, 51, 102); background-color: rgb(255, 255, 0); font-size: 80%;" data-gramm_id="4a811d32-0134-1c38-8bef-4774e336c623" data-gramm="true" data-gramm_editor="true">
+<p>3: Code executed in page</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 82px; top: 41px; height: auto;" data-block-id="f062830eb5cd8dfecbbbb1d4bea1fe83"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 22; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>A typical script to launch Puppeteer</h3>
+</div></div>
+</section></section><section class="stack" data-id="0622389a20cedcf80997d99865c18ae9"><section data-background-color="#ffffff" data-id="4e5d5e842595f67f122c6a7caefa730c"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="f5f53077a34b6d0121377c54a17605c8"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>Remember some <span style="color:#FF8C00"><strong>useful characteristics</strong></span> of Puppeteer...</h2>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="d38c67b8183d06152635df9c652f618e"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="1edaa36f41925dc06afddda2ecced12f"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You can <span style="color:#FF8C00"><strong>install Chrome extensions</strong></span> on launch.</h3>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" data-block-id="bfdef3b52a28ba3cc59543a1bd83415a" style="min-width: 30px; min-height: 30px; width: 800px; height: 210px; left: 80px; top: 280px;"><div class="sl-block-content notranslate" style="z-index: 12;" data-highlight-theme="obsidian"><pre class="javascript"><code>// welcome external devtools
+return await puppeteer.launch({
+  args: [
+    // loading Chrome Vue devtools
+    `--load-extension=/.../vue-devtools/shells/chrome/`,
+    ]
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="b1aab27750069c1a469d965369a5b62d"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#working-with-chrome-extensions" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#working-with-chrome-extensions</a></pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="55a9908fc1c607f7998d98e0b9f51029"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="d157a301a2bc5800c5e5b3cb6579e29b"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You can launch a <span style="color:#FF8C00"><strong>single</strong></span> and shareable <span style="color:#FF8C00"><strong>Chrome instance</strong></span> to improve performance.</h3>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 137px; left: 80px; top: 353px;" data-block-id="1539f3cfe5c4270fc91da2a135c3e933"><div class="sl-block-content notranslate" style="z-index: 13;" data-highlight-theme="obsidian"><pre class="javascript"><code>// if you have previously saved the Chrome endpoint you can connect to it
+// instead of creating a new one
+browser = await puppeteer.connect({browserWSEndpoint: existingEndPoint});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 558px; height: auto;" data-block-id="cb821032cea531a5aafa22a886081879"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre>e.g. <a href="https://github.com/smooth-code/jest-puppeteer" target="_blank">https://github.com/smooth-code/jest-puppeteer</a></pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="0a7224af8d99f0e405ab05998b291c92"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="466d5c34875a37f7c8c245c79bb4a48c"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>Chrome <span style="color:#FF8C00"><strong>flags</strong></span> (hidden or newer settings) are customisable.</h3>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="1cb70d3e4a461c6b34d4423bb1a75fcc"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerdefaultargsoptions" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerdefaultargsoptions</a></pre>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 137px; left: 80px; top: 283px;" data-block-id="6fb0eb10dae09d771c2ef1bb48ddcbe8"><div class="sl-block-content notranslate" style="z-index: 14; font-size: 150%;" data-highlight-theme="obsidian"><pre class="javascript"><code>const browser = await puppeteer.launch({
+    args: ['--no-sandbox']
+});</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="0b04720cdbe528e887ad42126eec2c11"><div class="sl-block" data-block-type="text" style="width: 806px; left: 81px; top: 140px; height: auto;" data-block-id="21990e3441f797f2eb6f14f62b48f774"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You can go <span style="color:#FF8C00"><strong>incognito</strong></span>.</h3>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="8a36269e628109dd9254c14c171e66aa"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#browsercreateincognitobrowsercontext" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#browsercreateincognitobrowsercontext</a></pre>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 207px; left: 81px; top: 247px;" data-block-id="e3272e809b72db0d187faf9e6c0ff4b3"><div class="sl-block-content notranslate" style="z-index: 14;" data-highlight-theme="obsidian"><pre class="javascript"><code>const browser = await puppeteer.launch();
+// Create a new incognito browser context.
+const context = await browser.createIncognitoBrowserContext();
+// Create a new page in a pristine context.
+const page = await context.newPage();
+// Do stuff
+await page.goto('https://example.com');</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="ebca278d1cf40ad9680700c2470b647a">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="393fb6227b518d41e972d62d9e7fdd1f"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You could <span style="color:#FF8C00"><strong>connect to a Chrome of yours</strong></span> (to leverage cookie, history etc.)</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 173px; left: 80px; top: 317px;" data-block-id="89b394da24709d3a83f1ec1d7772677d"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 150%;" data-highlight-theme="obsidian"><pre class="javascript"><code>const browser = await puppeteer.launch({
+    executablePath: '/path/to/Chrome'
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="1ddc677c96aa9c8d46f3bee8b21741e6"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerexecutablepath" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerexecutablepath</a></pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="e7dd4d2d1ee251af9f55225345265b9d">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="9b56fe1e1bebe3a509a957edb18f9a97"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>It allows you to easily understand if there are <span style="color:#FF8C00"><strong>errors in page</strong></span>.</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 173px; left: 80px; top: 317px;" data-block-id="dcc41c5bbdf7116101183e5631dee0fd"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 130%;" data-highlight-theme="obsidian"><pre class="javascript"><code>const browser = await puppeteer.launch({});
+const page = await browser.newPage();
+
+// when an error is thrown in Chrome
+// it's logged by the node process
+page.on('pageerror', e =&gt; console.log(e.text))</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="1a9b95a0c67b28a2646d5ffcf352a463"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-pageerror" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-pageerror</a>
+</pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="552bc00dc748e029c7abf9ff31fc9bb6">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 70px; height: auto;" data-block-id="a5d1a31471d7d9aa09cea60ce0523db1"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You can <span style="color:#FF8C00"><strong>intercept requests</strong></span>.</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 412px; left: 80px; top: 140px;" data-block-id="395e57f18a09c0a7165b7291797476d7"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 130%;" data-highlight-theme="obsidian"><pre class="javascript"><code>await page.setRequestInterception(true);
+
+page.on('request', request =&gt; {
+  // it intercepts every call to register.php and
+  // responds with a custom JSON
+  if (request.url() === 'register.php') {
+    request.respond({
+      content: 'application/json',
+      body: JSON.stringify({registered: true})
+    });
+  }
+  else {
+    // other requests work as usual
+    request.continue();
+  }
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="3d9f5d18db3b66852b6920b5b528973b"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-request%E2%80%8B%20%E2%80%8B" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-request</a><span style="font-size:36px"><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#event-request%E2%80%8B%20%E2%80%8B" target="_blank">
+</a></span></pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="4db088b808b40973506927284a2d443f">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="288c7be299067ce5f337a2233462e992"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You can <span style="color:#FF8C00"><strong>set cookies</strong></span>.</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 210px; left: 80px; top: 280px;" data-block-id="33809d2e773bb374d82b458fb0609714"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 150%;" data-highlight-theme="obsidian"><pre class="javascript"><code>await page.setCookie({
+    name: 'loggedIn',
+    value: '1'
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 560px; height: auto;" data-block-id="c630413018d5c175714b9f4f153e9c14"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagesetcookiecookies%E2%80%8B" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagesetcookiecookies​</a></pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="86207ef7bb10e4167c6f6de0cc79326e">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 70px; height: auto;" data-block-id="12b2cf32514391351999709a86b4afa6"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>You can <span style="color:#FF8C00"><strong>emulate devices</strong></span>.</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 420px; left: 80px; top: 140px;" data-block-id="85976364bef0beafdd7af75552e3982c"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 120%;" data-highlight-theme="obsidian"><pre class="javascript"><code>const device = {
+    'userAgent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1',
+    'viewport': {
+      'width': 375,
+      'height': 667,
+      'isMobile': true,
+      'hasTouch': true,
+      'isLandscape': false
+    }
+  }
+await page.emulate(device);
+
+// or you can use one of the presets
+
+const devices = require('puppeteer/DeviceDescriptors');
+const iPhone6 = devices['iPhone 6'];
+await page.emulate(iPhone6);
+</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 594px; height: auto;" data-block-id="e3f2841207b9a060e0659ce8dbc2603d"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="color: rgb(255, 255, 255); z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageemulateoptions" target="_blank">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageemulateoptions</a>
+</pre>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="48bff654e2f80662a13780b26cc7d398">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 211px; height: auto;" data-block-id="34c35a9622a7105a7e6b1432669da6ce"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>• $, $$, <span style="color:rgb(255, 255, 255)">$eval, $$eval: DOM utilities</span></p>
+
+<p><span style="color:rgb(255, 255, 255)">• </span><span style="color:#FF8C00"><strong>addScriptTag</strong></span>, <strong><span style="color:#FF8C00">addStyleTag</span><span style="color:#FFFF00">: </span></strong>to add resources in page</p>
+
+<p>• page.evaluate: runs a function into the browser</p>
+
+<p><span style="color:rgb(17, 17, 17)">• </span>page.<span style="color:#FF8C00"><strong>exposeFunction</strong></span>: adds a function</p>
+
+<p>• page.click</p>
+
+<p><span style="color:rgb(255, 255, 255)">• </span>page.hover</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="369358a31c08639e22282be24f084dc4"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>And many others</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="556c490aa9965afc0b2b82d1baf37c17" style="height: auto; min-width: 30px; min-height: 30px; width: 800px; left: 80px; top: 560px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;" data-gramm_id="291ce248-49bf-bbcd-6727-601f9a0fa972" data-gramm="true" data-gramm_editor="true">
+<pre><a href="https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md" target="_blank"><span style="text-align:left">https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md</span></a></pre>
+</div></div>
+</section></section><section class="stack" data-id="638dca60de58cf07184acaadb850df2d"><section data-background-color="#ffffff" data-id="0016c026f8cc4dfc4abcb74be29c656c"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="8936e6c068134c000eb80f82ff2aa14a"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h1>How can we <span style="color:#FF8C00"><strong>debug</strong></span> a Puppeteer script?</h1>
+</div></div>
+
+
+
+
+
+
+</section><section data-background-color="#ffffff" data-id="e41ae5704fb9dac5bdb17b013f213d61">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 226px;" data-block-id="11c6de5f32fb0df8273b18d443c6f4c7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Turn off <span style="color:#FF8C00"><strong>headless mode</strong></span>
+</h2>
+
+<p>So you can see what the browser is doing.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="9f9b8123838a404075751da1eed42c5b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<p><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></p>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="9d5ddbce6441256c6176d37eb8315264" style="min-width: 30px; min-height: 30px; width: 800px; height: 140px; left: 80px; top: 420px;"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 14; font-size: 150%;"><pre class="javascript"><code>const browser = await puppeteer.launch({
+    headless: false
+});</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="e7751d6b3102415d43546584d302c762">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 221px;" data-block-id="2e2ccd4f993313a97089ef011f751d54"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>
+<span style="color:#FF8C00"><strong>Slow down</strong></span> the browser</h2>
+
+<p>Not ideal for very long tests but super useful though.</p>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="0710be5bc3d66aea87b3d7d088dcddf0"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 13; font-size: 150%;"><pre class="javascript"><code>const browser = await puppeteer.launch({
+  headless: false,
+  slowMo: 250 // slow down every action by 250ms
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="e40d380b106a6b6a2f1a855f874f8c13"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<p><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></p>
+</div></div></section><section data-background-color="#ffffff" data-id="70cc9d9ad725a6c3b313c01ff33ab398">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="11f4356e094c8fbff023b3eeae5cdfac"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Avoid closing the browser</h2>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 350px;" data-block-id="93a198ac6849e12d6f58f640a3a8cdc5"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 13; font-size: 150%;"><pre class="javascript"><code>afterAll(async () =&gt; {
+  // await browser.close();
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 71px;" data-block-id="ea1b502853bbdecb813940e372b6e6f2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from... me 😊</p>
+</div></div>
+</section></section><section class="stack" data-id="920df9e612819d7476441354fc4df5ed"><section data-background-color="#ffffff" data-id="d29f61c1f680e1aaf0a2fb3283ff9241"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 552px; height: auto;" data-block-id="f4170419de20e533e5373aed53f5ff5c"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>The button <span style="color:#FF8C00"><strong>takes the user to another page</strong></span>.</p>
+
+<p>Complete the test that checks it.</p>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 154px; left: 80px; top: 162px;" data-block-id="7dbae22dfb6a5ae3076cfd6f4f4f0f96"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 150%;" data-highlight-theme="obsidian"><pre class="bash"><code>open ./dist/test-1.html
+
+open ./test/test-1.e2e.test.js</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 335px; height: auto;" data-block-id="2466d5ac84c4f7c7eda15b04013e2d52"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>• index.html has a <span style="color:#FF8C00"><strong>big blue button</strong></span></p>
+
+<p>• test-1.e2e.test.js misses something (see the comments at line 22)</p>
+
+<p>• launch the test suite with $ npm test</p>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="1a98212fe10449c48ba90e6b132b2d43" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 80px; top: 46px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><span style="color:#FF8C00"><strong>Demo 1</strong></span></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="74edaf1f44881c34eb0b7b20643ed2dc">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 350px; left: 80px; top: 280px;" data-block-id="1de34565fbb52e49c36ceb2afb683cad"><div class="sl-block-content notranslate" style="z-index: 12; font-size: 110%;" data-highlight-theme="obsidian"><pre class="javascript"><code>describe(`That's our first E2E test`, () =&gt; {
+  test(`The button brings the user to the next page`, async () =&gt; {
+    await page.goto(`file:${path.join(__dirname, './../dist/test-1.html')}`);
+
+    // always add a 'data-test' attribute to the elements that will
+    // participate to your tests
+    await page.click('[data-test="button"]');
+
+    // checking for a specific content is a good way to be 100% sure
+    // that the page has been loaded
+    await expect(page).toMatch('Hello from FETI');
+  }, 5000);
+});</code></pre></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 132px;" data-block-id="1d7cd8fe6208c6907b8bc71f34c43606"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Solution</strong></h1>
+</div></div>
+</section></section><section data-background-color="#ffffff" data-id="4c89d6aa43e469cb2603d6c074c8708c">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="c5e80cadc92031d8d5a6247e96c8990e"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>It should be obvious but remember: the fact that your suite tests is running in a real and interactive browser... it doesn't mean that you should interact with it!</p>
+
+<p> </p>
+
+<p>When you are running the browser in non-headless mode remember to <span style="color:#FF0000"><strong>not affect the test</strong></span> with your mouse/keyboard.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="939e345dbbfb70e76103d842b7a981b4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 0, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Never interact with the test</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 960px; height: 700px; left: 0px; top: 0px;" data-block-id="719ad99931929a40097316ba1fb12080"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-stroke-color="#ff0000" data-shape-stroke-width="15px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 960 700"><defs><clippath id="shape-mask-48-1548581943349"><rect width="960" height="700" rx="0" ry="0"></rect></clippath></defs><rect width="960" height="700" rx="0" ry="0" clip-path="url(#shape-mask-48-1548581943349)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#ff0000" stroke-width="30"></rect></svg></div></div></section><section class="stack" data-id="3d2b0364e1c920f0b08716098d3182cc"><section data-background-color="#ffffff" data-id="16ed058b895290c0675314c0e2d5eca9">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 210px; left: 80px; top: 350px;" data-block-id="9510cc70fb1a0d27717ee17a006773ac"><div class="sl-block-content notranslate" style="z-index: 12; font-size: 150%;" data-highlight-theme="obsidian"><pre class="xml"><code>&lt;a data-test="button"&gt;
+
+&lt;!--
+find it with the following selector
+[data-test="button"]
+--&gt;</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 210px; height: auto;" data-block-id="6e3f4d26ce98b15b00d3019dce6c6472"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>If you can't rely on contents... Always add a <span style="color:#FF8C00"><strong>data-test</strong></span> (or <span style="color:#FF8C00"><strong>data-testid</strong></span>) attribute to the elements that will be referenced by the tests.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 64px;" data-block-id="ecbc7daa4a96746bf041b004433444ba"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Best practice</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 81px; top: 580px;" data-block-id="f555a9c6e6fc3f272eb302383cf9b86d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Why?</h3>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="de78edd5dec36b218ab7e742da2e4c31">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 211px; height: auto;" data-block-id="90bda0b6f7d105fad979a3813f7e2b5a"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Because every attribute has a “role”.</p>
+
+<p> </p>
+
+<p>We use .classes for CSS (and they got replaced in case of CSS Modules), #ids for JS, and therefore they can change based on CSS and JS needs…</p>
+
+<p> </p>
+
+<p>A <span style="color:#FF8C00"><strong>dedicated attribute is more resilient to refactoring</strong></span> and leads every (diligent) developer to keep it or, at least, ask himself for the attribute use.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="30f3da83a98e36cc53bde0b0d0b95629"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>data-test attribute</strong></h1>
+</div></div>
+</section></section><section class="stack" data-id="daab8bb6d429ab6a2ecfa83cfcbfc825"><section data-background-color="#ffffff" data-id="c476f410f31ffc6df9b61d0643a44fd3">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="75f74e568c1d09e64d7578bc6a56af53"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Ok, so:</p>
+
+<p>• E2E tests are very important...</p>
+
+<p>• the first test seemed really easy to be written…</p>
+
+<p>Amazing, <span style="color:#FF8C00"><strong>I’ll write ~1000 E2E tests</strong></span> as soon as I back home!!!</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 83px; top: 140px;" data-block-id="0829c2c337ec331844d83b24aa5131a5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Wow...</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="88b4c5d6716deafe4c00b348242e9100">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="0d329c6d769fea8839392867fb40bd2c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Let’s speak about the cons!</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="913e12260b1b3b14df0742e7e39806c1">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="4800c0771287baced45377a0fdafeffe"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>They’re the <span style="color:#FF8C00"><strong>longest to be written</strong></span>, not in terms of lines of code but in terms of <span style="color:#FF8C00"><strong>variables to be considered</strong></span>.</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="4dad0c414f49551ec13401e566feffa5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 510px;" data-block-id="8f4e7f792584816bff46836f6ffd5ca9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Why?</h3>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="99e1914bc2d632ae9f13840cf68cfabd">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="73df9d8bad9a657e3e9682b76312d54d"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Because <span style="color:#FF8C00"><strong>you aren’t in isolation</strong></span> (like in Unit tests), nor in a super-mocked environment...</p>
+
+<p> </p>
+
+<p>You have a <span style="color:#FF8C00"><strong>real browser on a real network</strong></span>, you’ll face network latencies, temporary downs of the server, service workers, unpredictable AD scripts and banners, (possible) browser drivers inconsistencies…</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="c5ca8b82ec67aea7b6c223b062440856"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="53cc0980e750319055296727e0db0270">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="9ca256a0b307e8f9aa84e88481ac3446"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Simulating the (exact) user behaviour sometimes could be very tricky (blur, input typos etc.).</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="32d982464a8182a3410bc5ad5eb3c023"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="c6793d12e166232e065f806d0acb9b4c">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="d8d5680c3026eddb51956970866d8ea1"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>They’re not always parallelisable (in simple cases they are, but they can lead to errors and debugging hell).</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="8895e7c9355d77aac84c5037596121b6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="567c0c9084a488e19cc456f0e5828e5b">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="162cda9f39f14ebcad1fb15a663e78b5"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>The more complex they are, the more difficult they are to debug.</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="2ff4ca160a6257474f83a292abf80dff"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="da460359489ed4cad22e300878a6bcd2">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="970d0e918100d3471dbf11350f5ff7b9"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>If you try to DRY your tests you’re probably adding another (hard to manage) complexity layer.</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="c94b59238b5740a3dc3c86b2b1a4bc61"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="08c7febb3d47fafbb4c9bb24c005a099">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="92927a26befd06d1ba084c117721548f"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p><span style="color:#FF8C00"><strong>They can</strong> <strong>fail</strong></span>, get used with that, there are too many context variables to be considered.</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="3eb66dd1341cfc82c13a6c4ff8521957"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="04e7b49328abd1877a15a045b5d94a5d">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="a61b7f52e5dcaeb292482c6a8ce1a69f"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>They are <span style="color:#FF8C00"><strong>slow</strong></span>, even with almost instant UI interactions.</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="b647ec9586de6825a5035f97ba51810e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="72f28a982d36629646e961a5d553013a">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 276px; height: auto;" data-block-id="5e34c7f04ae629fec037f5366d98c3da"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Everyone defines them flaky and brittle...</p>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 135px;" data-block-id="7abdff58590133f1a675100c49619d0f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Cons</strong></h1>
+</div></div></section></section><section class="stack" data-id="c1db3b20306ba44c4e2449d8cc3e84e3"><section data-id="ec6eed774fe999b078d40aa2dfb7ff7d" data-background-color="#ffffff">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 80px; top: 140px;" data-block-id="2e81d845a4e256575b9c07680018b8c5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Demo 2</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="1dbc11bce361e41c94ce36084110c2f3"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>It's the same of the first test but a the page has a <span style="color:#FF8C00"><strong>cookie footer</strong></span>...</p>
+</div></div></section><section data-background-color="#ffffff" data-id="e55847f492744ad772769a8c33c3ded0"><div class="sl-block" data-block-type="code" style="width: 800px; height: 351px; left: 80px; top: 209px;" data-block-id="d8485bdea54cb9576efe180172c22915"><div class="sl-block-content notranslate" style="z-index: 12;" data-highlight-theme="obsidian"><pre class="javascript"><code>describe(`That's our second E2E test`, () =&gt; {
+  beforeAll(async () =&gt; {
+    await page.goto(`file:${path.join(__dirname, './../dist/test-2.html')}`);
+
+    // don't let the test fail for a silly element like a cookie footer
+    // It could be already accepted when you navigate to another page
+    if(await page.$('[data-test="cookie-footer-acceptance"]')) {
+      try {
+        // what happens if it exists but isn't clickable (eg. it's hidden)?
+        // A try/catch will manage the case
+        await page.click('[data-test="cookie-footer-acceptance"]');
+      } catch(e) {
+        // the element exists but isn't clickable
+      }
+    }
+  });
+});</code></pre></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 70px;" data-block-id="973dd17480dcf94d9c5d859622d56ae0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Solution</strong></h1>
+</div></div>
+</section></section><section data-background-color="#ffffff" data-id="2a4d3a9c9abeb26de24c3fc7cc038929">
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="e6b55c308c75dc75df6367ce5f2e3bf2"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p><span style="color:#FF0000"><strong>Never use</strong></span> some "<span style="color:#FF0000"><strong>sleep</strong></span>" code, you can’t determine how much a page/script could be waited for (render waitings, network conditions etc.).</p>
+
+<p> </p>
+
+<p>Use waiters, promises, framework-specific render callbacks (like Vue.nextTick) but not sleep.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="378cd1a15fd4a0f3ffb11ca79907ed03"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 0, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Never "sleep"</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 960px; height: 700px; left: 0px; top: 0px;" data-block-id="17368ebe9edd9fdad80b1cff1da1b894"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-stroke-color="#ff0000" data-shape-stroke-width="15px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 960 700"><defs><clippath id="shape-mask-1-1552153379309"><rect width="960" height="700" rx="0" ry="0"></rect></clippath></defs><rect width="960" height="700" rx="0" ry="0" clip-path="url(#shape-mask-1-1552153379309)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#ff0000" stroke-width="30"></rect></svg></div></div></section><section class="stack" data-id="f7a47677501ab033dd5151531ed69174"><section data-background-color="#ffffff" data-id="005219139a757192c31d90b5bb15d8af">
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="51de4e92dc1d0b680319ad4cb0fd6093"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Again! Now the cookie footer disappears with a <span style="color:#FF8C00"><strong>CSS animation</strong></span>!</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="14865b609cbf978a9331429b0975a4c0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Demo 3</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="9ae28351387448b59644f0ba352ed534"><div class="sl-block" data-block-type="code" style="width: 800px; height: 351px; left: 80px; top: 209px;" data-block-id="a16e9fd11ba0fb69fa646c8502a24e99"><div class="sl-block-content notranslate" style="z-index: 12; font-size: 110%;" data-highlight-theme="obsidian"><pre class="javascript"><code>if(await page.$('[data-test="cookie-footer-acceptance"]')) {
+  try {
+    await page.click('[data-test="cookie-footer-acceptance"]');
+    // you can wait that an element is hidden
+    // @see https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagewaitforselectorselector-options
+    await page.waitForSelector('#cookie-footer', {
+      hidden: true
+    });
+  } catch(e) {
+    // the element exists but maybe it isn't clickable
+  }
+}</code></pre></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 70px;" data-block-id="597e6a62f16362764e08f8e41389c19d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Solution</strong></h1>
+</div></div>
+</section></section><section class="stack" data-id="9cee41be0745ed459f02cd757afd8bf6"><section data-background-color="#ffffff" data-id="c54bacfe8fb550963154ddd3a189bff6">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 350px;" data-block-id="9a19c479ca1c36605038adb0882dff49"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>With page.evaluate<span style="color:#FFFF00"> </span>you can <span style="color:#FF8C00"><strong>execute code into the running browser</strong></span> (like you do when you write code into the DevTools console) and give back the result to your NodeJS script.</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="34b546e07d1e03a668ae26bd1f7547e5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Page.evaluate</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="31e581bea23cfa6b4a8ea5a2d94e2db2">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="d892ef926eeeb47d27b93b69f68df4f1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>
+<span style="color:#FF8C00"><strong>Page.evaluate</strong></span> example</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 400px; height: 501px; left: 0px; top: 199px;" data-block-id="3ae68aff7ba3c2bdcb2d4c69747350a0"><div class="sl-block-content notranslate" style="z-index: 13; border-width: 10px; border-color: rgb(255, 0, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>const puppeteer = require('puppeteer');
+
+(async (options) =&gt; {
+  browser = await puppeteer.launch({
+    headless: false,
+    devtools: true
+  });
+  page = await browser.newPage();
+
+  console.log('Node logging');
+  await page.evaluate(
+    () =&gt; console.log('Browser logging')
+  );
+})()
+</code></pre></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="06ec7a132346dbca891e687e0ecd11cb" style="min-width: 4px; min-height: 4px; width: 548px; height: 439px; left: 412px; top: 199px;"><div class="sl-block-content" style="z-index: 14;"><img data-natural-width="1440" data-natural-height="1153" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/5d783e9daa909d14c7473f8f21f5bdc1.jpg"></div></div>
+</section><section data-background-color="#ffffff" data-id="7464e60ff9706f6a398145ac40224972">
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 210px; left: 80px; top: 420px;" data-block-id="36f42eeea72ae8c5e4c69917cd877c69"><div class="sl-block-content notranslate" style="z-index: 12; font-size: 120%; border-style: solid; border-width: 10px; border-color: rgb(0, 255, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>const seven = 7;
+const result = await page.evaluate(aNumber =&gt; {
+  // JQuery is in page? Redux?
+  // Use them and give back results to the NodeJS script
+  return aNumber * 10;
+}, seven);
+console.log(result); // 70</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="c239d49f63ab521ddddf61e9558b3a36"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Take care of <span style="color:#FF8C00"><strong>the scope</strong></span>
+</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 210px; left: 80px; top: 175px;" data-block-id="5b990e5926896cc8ff6301b3dd7979f1"><div class="sl-block-content notranslate" style="z-index: 14; font-size: 120%; border-style: solid; border-width: 10px; border-color: rgb(255, 0, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>const seven = 7;
+const result = await page.evaluate(() =&gt; {
+    // error! Because the scope is the Chrome's window!
+    // Not the NodeJS script!
+    return seven * 10;
+});
+console.log(result);
+</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="8f7408e90c649d9b94c2294a30484d6b">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 50px;" data-block-id="ec79532a741c05c04432d3add6651a87"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17; text-align: left; background-color: rgb(255, 255, 255); padding: 10px;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>To better understand the scope problem: remember that the <span style="color:#FF8C00"><strong>Node</strong></span> script and the launched <span style="color:#FF8C00"><strong>Chrome</strong></span> instance <span style="color:#FF8C00"><strong>are separated</strong></span>
+</h3>
+</div></div>
+<div class="sl-block" data-block-type="image" style="width: 408px; height: 518px; left: 551px; top: 70px; min-width: 4px; min-height: 4px;" data-block-id="9b704399503e7b14978d5c00b01b30f8"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="1050" data-natural-height="1334" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/58c787a58449bba95ece2a4ed064096a.jpg"></div></div>
+<div class="sl-block" data-block-type="image" style="width: 476px; height: 518px; left: 0px; top: 70px; min-width: 4px; min-height: 4px;" data-block-id="80d01bed74e86ff952e92ceed1a2f053"><div class="sl-block-content" style="z-index: 13;"><img style="" data-natural-width="1226" data-natural-height="1334" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/ffa18659a92621c38e6edb516d353300.jpg"></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 436px; height: 151px; left: 41px; top: 421px;" data-block-id="f8f1aeef5e21179550702299ee636ef2"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 14;" data-shape-stroke-color="#ff3366" data-shape-stroke-width="5"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 436 151"><defs><clippath id="shape-mask-262-1539234789341"><rect width="436" height="151" rx="0" ry="0"></rect></clippath></defs><rect width="436" height="151" rx="0" ry="0" clip-path="url(#shape-mask-262-1539234789341)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#ff3366" stroke-width="10"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 166px; height: 56px; left: 343px; top: 462px;" data-block-id="fc0585f8b46edc63355f648f8c821424"><div class="sl-block-style" style="z-index: 15; transform: rotate(180deg);"><div class="sl-block-content" data-shape-type="arrow-right" data-shape-fill-color="rgb(255, 51, 102)" data-shape-stretch="true" style="z-index: 15;" data-shape-stroke-color="#ffff00" data-shape-stroke-width="3"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 166 56"><defs><clippath id="shape-mask-263-1539234789343"><polygon points="0,16.8 83,16.8 83,0 166,28 83,56 83,39.199999999999996 0,39.199999999999996"></polygon></clippath></defs><polygon points="0,16.8 83,16.8 83,0 166,28 83,56 83,39.199999999999996 0,39.199999999999996" clip-path="url(#shape-mask-263-1539234789343)" class="shape-element" fill="rgb(255, 51, 102)" stroke="#ffff00" stroke-width="6"></polygon></svg></div></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 166px; height: 56px; left: 509px; top: 462px;" data-block-id="5f842c71ecb97e51cda57e374ecb3dc7"><div class="sl-block-style" style="z-index: 16; transform: rotate(360deg);"><div class="sl-block-content" data-shape-type="arrow-right" data-shape-fill-color="rgb(255, 51, 102)" data-shape-stretch="true" style="z-index: 16;" data-shape-stroke-color="#ffff00" data-shape-stroke-width="3"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 166 56"><defs><clippath id="shape-mask-264-1539234789343"><polygon points="0,16.8 83,16.8 83,0 166,28 83,56 83,39.199999999999996 0,39.199999999999996"></polygon></clippath></defs><polygon points="0,16.8 83,16.8 83,0 166,28 83,56 83,39.199999999999996 0,39.199999999999996" clip-path="url(#shape-mask-264-1539234789343)" class="shape-element" fill="rgb(255, 51, 102)" stroke="#ffff00" stroke-width="6"></polygon></svg></div></div></div>
+</section><section data-background-color="#ffffff" data-id="7c2ce19239455ce51a23d2572da4aa9a">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="957786ec6dc78e0cce8b83db473ee4d3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Use a promise for every async code</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 350px; left: 80px; top: 210px;" data-block-id="6c8ca91a4f42c7c467cdff9f967022cd"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 120%; border-width: 10px; border-color: rgb(255, 0, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>const seven = 7;
+const result = await page.evaluate(aNumber =&gt; {
+  // you can use a promise for every async stuff
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; resolve(aNumber*10), 1000);
+  });
+}, seven);
+console.log(result); // 70
+</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="c028d90a1f69def286c9bdbeca46b1de">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="688e27f0da7c9a07f413b26d75af9c95"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>About the test-4 solution</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 420px; left: 80px; top: 210px;" data-block-id="f7f3d7c3cc1850800f28037c832791a9"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 120%; border-width: 10px; border-color: rgb(255, 0, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>// code refactored without arrow functions
+await page.evaluate(function() {
+  // a Promise is returned to the page.evaluate
+  // so it waits until the promise is fullfilled
+  return new Promise(resolve =&gt; {
+    // now we're in the Chromium instance, we can listen for
+    // the event triggered on the window
+    window.addEventListener('cookieFooterDidHide', function(){
+      // when the event has been triggered we fullfill the promise
+      resolve();
+    });
+  });
+});
+// the code after the page.evaluate will be run once the event
+// in the browser will be triggered</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="055c98dcd7e71a774cb08569076d6e12">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="731b80fd32455e1f7852fc0484b7bec8"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>
+<span style="color:#FF8C00"><strong>Page.evaluate</strong></span> is often used to retrieve data from the DOM</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 421px; left: 80px; top: 209px;" data-block-id="52d762447f9d39202cadb98cbaf1986f"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 130%;" data-highlight-theme="obsidian"><pre class="javascript"><code>const SELECTOR = '[href]:not([href=""])';
+let link;
+
+link = await page.evaluate((sel) =&gt; 
+    document.querySelector(sel).getAttribute('href')
+  , SELECTOR);</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="36f5e503954e1414b4d1427beed81c6e">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="7d13891aaf15ef1fc959ae043bf26bae"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>But it isn't the only way to do that!</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 421px; left: 80px; top: 209px;" data-block-id="8b709a5b580e236af7c506216bb45b94"><div class="sl-block-style" style="z-index: 13;"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 120%;" data-highlight-theme="obsidian"><pre class="javascript"><code>const SELECTOR = '[href]:not([href=""])';
+let link;
+
+link = await page.evaluate((sel) =&gt; 
+    document.querySelector(sel).getAttribute('href')
+  , SELECTOR);
+
+// compare the two following examples
+
+link = await page.$eval(SELECTOR, el =&gt; el.getAttribute('href'));
+
+// or
+
+link = await page.$(SELECTOR).getProperty('href').jsonValue();</code></pre></div></div></div>
+</section></section><section class="stack" data-id="cc6cb28a8b744e176c0182fba5c5875d"><section data-background-color="#ffffff" data-id="fda5845fbf501ff4c43ef0b88bcc683c">
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="d56a3230adc680bcdc6f3a42298f2069"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>The last time with the button, trust me 😊</p>
+
+<p>Now the cookie footer disappears (from a user perspective... not from a CSS one) <span style="color:#FF8C00"><strong>dispatching an event</strong></span>!</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="ec8c9f4e776fff9c0418262bfd1addf6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Test 4</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="6842a9e318c8f2bb3a3d89d5e1a7031e">
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 351px; left: 80px; top: 209px;" data-block-id="1bf2e3cdbb6289a8218844b4f4433083"><div class="sl-block-content notranslate" style="z-index: 12; font-size: 110%;" data-highlight-theme="obsidian"><pre class="javascript"><code>if(await page.$('[data-test="cookie-footer-acceptance"]')) {
+  try {
+    await page.click('[data-test="cookie-footer-acceptance"]');
+
+    // @see https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pageevaluatepagefunction-args
+    await page.evaluate(() =&gt; new Promise(resolve =&gt; {
+      // the following code will run into the browser page
+      window.addEventListener('cookieFooterDidHide', () =&gt; resolve());
+    }));
+
+  } catch(e) {
+    // the element exists but maybe it isn't clickable
+  }
+}</code></pre></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 70px;" data-block-id="89cd8968c9ad169d57817e5c752e6091"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Solution</strong></h1>
+</div></div>
+</section></section><section class="stack" data-id="e27c56367d1de8503058e19b550376dc"><section data-background-color="#ffffff" data-id="75e68f7619d832e987c0c1cbcc1df15c">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="6a3ed8ee7283d76dbe100baeb5996fa5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>What should I test?</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="792d1e7d9793ce142701e1d4aa4f2d0c">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="a8a15589897419e9cf763de182eaba3a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>I suggest you to test only the <span style="color:#FF8C00"><strong>best cases</strong></span> or the ones <strong><span style="color:#FF8C00">that generate value</span> </strong>($$$) for your company.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="e0e2a79109ebe2ea10b34f1488049828">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="237cc556314827e47e8e28d06d066795"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Test something that <span style="color:#FF8C00"><strong>broke in the past</strong></span> or that breaks often.</h2>
+</div></div>
+</section></section><section class="stack" data-id="4fd042fd50a6a436026621e3465a91ba"><section data-id="5e1dabae7c353a1155ee18b87bc78c65" data-background-color="#ffffff"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="730745e9e52671eb771c2de289270ad6"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h1>Let's see some other <span style="color:#FF8C00"><strong>debugging</strong></span> tips</h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="7a06a213452911b20ad3fd1030b00662">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 276px;" data-block-id="435de5d0cfc35657bca64fd908ea7861"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Capture <span style="color:#FF8C00"><strong>console output</strong></span>
+</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="f1a54f323dc4d44235921e8e0a023e66"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></pre>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="be926344ff1e2ed72db7f5915eb4e02c"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 14; font-size: 120%;"><pre class="javascript"><code>page.on('console', msg =&gt; console.log('PAGE LOG:', msg.text()));</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="3fd0ec0f8c0aee9d24665eacccf6399d">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 230px;" data-block-id="83c836d20439005ca54dc762c5f3978e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Launch Puppeteer with the <span style="color:#FF8C00"><strong>DevTools already opened</strong></span>
+</h3>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="2daab9dbe25eb05f18832c06787f1682"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 12;"><pre class="javascript"><code>const browser = await puppeteer.launch({
+  headless: false,
+  slowMo: 250, // slow down by 250ms
+  devtools: true
+});</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="34b84ab56e016ff8d0c6a0b1f2d925fa"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></pre>
+</div></div></section><section data-background-color="#ffffff" data-id="dbdbdfa00c0fd438c0953d318de07b24">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 81px; top: 206px;" data-block-id="b5abe12741cf99e07f04dbcf1858deb9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><strong>Add an evaluate statement with <span style="color:#FF8C00">debugger</span> inside</strong></h3>
+
+<p>Or add debugger to an existing evaluate statement (it works if the Chrome DevTools are opened).</p>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="4c0368fb7032ca518f1eb39b9d6df68e"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 12;"><pre class="javascript"><code>await page.evaluate(() =&gt; {debugger;});
+// The test will now stop executing in the above evaluate statement,
+// and chromium will stop in debug mode.</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="bc26c87cb84f0b01b9e62182e6934d3a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></pre>
+</div></div></section><section data-background-color="#ffffff" data-id="3ceb4618224319e10060b51d13d9c5eb">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="dff31713a93c0641f197a40b70dcfb77"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Change default test timeout</h2>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="55ce59511ab30b1cd5f2c2aabbdb4203"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 12; font-size: 150%;"><pre class="javascript"><code>jest.setTimeout(100000);</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="63df2a97661ad127eba7856a79c97b1c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></pre>
+</div></div></section><section data-background-color="#ffffff" data-id="8f74853d90c3162620e017053401217b">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="6971825e78ab3c3a1d36e6175f92a69d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Run a single test/suite</h2>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 280px; left: 80px; top: 350px;" data-block-id="dae9805dc5b81a10ec4cecbf2ad16c54"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 12; font-size: 130%;"><pre class="javascript"><code>describe.only('Temporary run only me please', () =&gt; {
+    test('The test we want to isolate', () =&gt; { ... });
+});
+
+describe('A suite that won\'t be launched', () =&gt; {
+    test('Test 2', () =&gt; { ... });
+});
+
+describe('Another suite that won\'t be launched', () =&gt; {
+    test('Test 3', () =&gt; { ... });
+});</code></pre></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="8a6dc677d33dd1e62485752108dbeea3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></pre>
+</div></div></section><section data-background-color="#ffffff" data-id="74cb436cc6056ec317faeb42463c4328">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="a52db746389942f54ec0f6c134ff23ed"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Skip some tests/suites</h2>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 280px; left: 80px; top: 350px;" data-block-id="c87b70e01b8b1e26811f3846b9984a50"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 11; font-size: 130%;"><pre class="javascript"><code>describe('Suite 1', () =&gt; {
+    test('The test we want to isolate', () =&gt; { ... });
+});
+
+describe.skip('A suite that will be skipped', () =&gt; {
+    test('Test 2', () =&gt; { ... });
+});
+
+describe('Suite 3', () =&gt; {
+    test.skip('A test that will be skipped', () =&gt; { ... });
+});</code></pre></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="8e9718e4b1e12e449e49e7a1eaffa821"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from</p>
+
+<pre><a href="https://github.com/GoogleChrome/puppeteer#debugging-tips" target="_blank">https://github.com/GoogleChrome/puppeteer#debugging-tips</a></pre>
+</div></div></section><section data-background-color="#ffffff" data-id="8473d1cb8e4edc1e2457d26102c5bc09">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="16ae40ba9b2ed30199d6cf81068a02f8"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>console.<span style="color:#FF8C00"><strong>log</strong></span> (into the Chrome instance) <span style="color:#FF8C00"><strong>the name of the test</strong></span>, so you always know which test is running if you are watching them.</h3>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="fd3db713c80251c087024b6f05a4b3a7"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 13; font-size: 120%;"><pre class="javascript"><code>await page.evaluate(() =&gt; console.log('Test name'));</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="330af6dee7ae359bf7900ca08e47f524"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from... me 😊</p>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="b8bd627b8b77040e1f7d972548730360">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="2447bbbadcd613d32fa66962707e734b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>You can also add a <span style="color:#FF8C00"><strong>fixed div</strong></span> in page to <span style="color:#FF8C00"><strong>show the test name</strong></span> at the top of the page, it’s not ideal but it could be very useful in some situations.</h3>
+</div></div>
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="32e1cdbeff9fa1b3e427ef0486604f32"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from... me 😊</p>
+</div></div></section><section data-background-color="#ffffff" data-id="29f187db3dee2f03a8214f7fe052c903">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="9f72b07980ef908a2fd4b6eb17b1e1f1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Use the right assertion</h3>
+
+<pre><a href="https://jestjs.io/docs/en/expect" target="_blank">https://jestjs.io/docs/en/expect</a></pre>
+</div></div>
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 159px; left: 80px; top: 261px;" data-block-id="858989447946cce0a0ec26aeed201eb0"><div class="sl-block-content notranslate" style="z-index: 11; font-size: 110%; border-width: 10px; border-color: rgb(255, 0, 0); border-style: solid;" data-highlight-theme="obsidian"><pre class="javascript"><code>Expected: true
+Received: false
+    3 | describe(`Test`, () =&gt; {
+    4 |   test(`Leverage assertions`, () =&gt; {
+  &gt; 5 |     expect(getObj().key === 5).toBe(true);
+// Ok, what is the value of getObj().key?</code></pre></div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 168px; left: 80px; top: 462px;" data-block-id="1e416ff9f36ca775b7c301eb2dcd48bd"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 120%; border-width: 10px; border-color: rgb(0, 255, 0); border-style: solid;" data-highlight-theme="obsidian"><pre class="javascript"><code>Expected: 5
+Received: 4
+    3 | describe(`Test`, () =&gt; {
+    4 |   test(`Leverage assertions`, () =&gt; {
+  &gt; 5 |     expect(getObj().key).toBe(5);
+// ok I'll fix it without relaunching the suite</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="6e56ef7e39a2239f9727945bea28740b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from... me 😊</p>
+</div></div></section><section data-background-color="#ffffff" data-id="e381ff7013d98f8efd000b2b76133f85">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="a2546c4ac51a1e86f6dea11b25bf70e2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui"><h3>Run test serially with</h3></div></div>
+
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 70px; left: 80px; top: 210px;" data-block-id="93436af797183729d04bb4fba01a582f"><div class="sl-block-content notranslate" style="z-index: 11; font-size: 110%; border-width: 10px; border-color: rgb(255, 0, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>$ npm test --runInBand</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 350px;" data-block-id="20611c57a83dc6e095abdaa2a97cd3b9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>because a <span style="color:#FF8C00"><strong>page executed in the background</strong></span> could have some unexpected behaviors...</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="6f2a53fd8af7d8997d27d1901603f586"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left; font-size: 80%;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Directly from... me 😊</p>
+</div></div></section></section><section class="stack" data-id="4e6c70be9723f8c9a6ad013e3727facc"><section data-background-color="#ffffff" data-id="47a48379b37e2b3b070728b37f7dcb30">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 70px;" data-block-id="3767bd219409fbcf1fc1b387373a9945"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Demo 5</strong></h1>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 210px; height: auto;" data-block-id="2a9b97d579b45261b28250036863f776"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p><span style="color:rgb(255, 255, 255)">• index.html is the usual Todo List app</span></p>
+
+<p>• add all the todos in the array, remove the first two and then... <span style="color:#FF8C00"><strong>read the store</strong></span> and check that the last two todos exist in the store itself.</p>
+
+<p>P.s. I exposed a <span style="color:#FF8C00"><strong>window.vueInstance</strong></span> variable so you can access the store with <span style="color:#FF8C00"><strong>window.vueInstance.$store.state.todos</strong></span></p>
+</div></div></section><section data-background-color="#ffffff" data-id="73abe3fef59060cf7ddf0471dadaabc8">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 168px; left: 80px; top: 280px;" data-block-id="2a5a0dcf83224cc52c4109ff1feb8cc0"><div class="sl-block-content notranslate" style="z-index: 12; font-size: 120%;" data-highlight-theme="obsidian"><pre class="javascript"><code># TLDR
+$ open test-5.e2e.test.js</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="bdf31961f946df42d528f89061f60994"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Solution</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="c97d228154ba6f4d740111ab5e1d6b1a">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="f70f6dbbef6626ba1969eb03590824c2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>This test leaves room for a series of cases that should make you think about <span style="color:#FF8C00"><strong>how it’s difficult</strong></span> to manage all the cases consistently when E2E testing.</h3>
+</div></div></section></section><section class="stack" data-id="1292f804a1f0446c306b83e9bf627dff"><section data-background-color="#ffffff" data-id="f280ccffa2a6c25be43a073ec6570f2a">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 253px;" data-block-id="212880215bc34f5cce6465bb10085538"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Other best practices</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="1438641a3a474dc44979d59c7ae8dde6">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 362px; height: auto;" data-block-id="329537de12cc6c90f7590c6af961d489"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Puppeteer is Chrome/Firefox(at the moment) but if you use Selenium etc. remeber to avoid launching every test on every browser. <span style="color:#FF8C00"><strong>Choose a reference browser</strong></span> and carefully select the test to be run on the other ones.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="a065f8285eaafc6b51d5c3772ac4182e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Choose where to test</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="15f6ad90a4d76b49871149bc7bbc502c">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="7a0a7746c31a86015522f39154026739"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Make a screenshot if a test fails. It can help you avoiding to relaunch the suite with the browser in non-headless mode.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="a99e3d8cdc36a949c68ea527cb0c9b24"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Make screenshots</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 140px; left: 80px; top: 420px;" data-block-id="966c94b9dd04f9c02c51cc0e2e376a77"><div class="sl-block-content notranslate" data-highlight-theme="obsidian" style="z-index: 14; font-size: 150%;"><pre class="javascript"><code>if (array.length !== 3)
+    await page.screenshot({path: 'screenshot.png'})
+expect(array.length).toBe(3)</code></pre></div></div>
+</section><section data-background-color="#ffffff" data-id="e72e2332072d1759530b83c2f33ae921">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 350px; height: auto;" data-block-id="3257b3b08713737a26b363721d09b895"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>In a page where everything changes soon… try to standardize your testing environment to avoid false negatives.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="49afd04fbf72bceb3308efeba2763d8b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong>Attention to the pages that update frequently</strong></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="6bf68419b57326503b33ee39cb6a2d74">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 82px; top: 350px; height: auto;" data-block-id="122dadde75bc6c5fe5d55c551a3f29bd"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>Don't think to test every corner case with E2E testing, it's pure madness.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 82px; top: 140px;" data-block-id="7031893f5ecbf2c294413f10f71a3c04"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong>Leave perfectionism at home</strong></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="c65f7fff084a1bdbbc01c527929a303c">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 82px; top: 280px; height: auto;" data-block-id="280821f72088dc0f3463ad0cc7275f09"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>An assertion is auto-explicative, an error isn't.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 82px; top: 140px;" data-block-id="8f2eb6d4c262ce594b090408283e8470"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong>Assert frequently</strong></h2>
+</div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 210px; left: 85px; top: 350px;" data-block-id="e012e3cb9cfc9fa749ea9ad631eb96ea"><div class="sl-block-content notranslate" style="z-index: 14; font-size: 120%; border-width: 10px; border-color: rgb(255, 0, 0);" data-highlight-theme="obsidian"><pre class="javascript"><code>await page.goto(AUTHENTICATED_ROOT);
+
+expect(page.url()).toEqual(expect.not.stringContaining('/login'));
+
+// you won't have a "element not found"
+// if something went wrong with the authentication
+await page.click('[data-test="create-new-post"]');</code></pre></div></div></section></section><section class="stack" data-id="6122b5e1d827a4b10251b49637984d77"><section data-background-color="#ffffff" data-id="b0065f2ff5d9dbde98796dc8246ef270">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="4b4dc700664b8be1f53f526dc7ce06e3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Puppeteer alternatives?</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="2a68f36a6d53e272e90de5e287ce79a5">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 177px;" data-block-id="3302ddc7216332f18bd08b86a1b5be50"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li>
+	<p><span style="color:#FF8C00"><strong>widely used</strong></span></p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p>not so easy to install/setup</p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p>it has a WebDriver for every desktop browser (IE too)</p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p><span style="color:#FF8C00"><strong>Expected Conditions</strong></span> FTW (a sort of page.waitForSelector on steroids) </p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="8a86a352ba04416eab86a62478223db3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong><a href="https://www.seleniumhq.org/projects/webdriver/" target="_blank">Selenium WebDriver</a></strong></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="b24849318f3b95909abe95fe93c81ef9">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 177px;" data-block-id="fd56e2269878703b764c319ce1d6c4a2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li>
+	<p><span style="color:#FF8C00"><strong>amazing "DevTools" UI</strong></span></p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p>clear errors</p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p><span style="color:#FF8C00"><strong>play/pause</strong></span> functionality</p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p>made only for E2E testing, it's not a generic automation browser</p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="65d874681622d28315158089ab8e1c2d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong><a href="https://www.cypress.io/" target="_blank">Cypress.io</a></strong></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="6a36d4cb551bb9a46a1e027ee5677cf6">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 177px;" data-block-id="ff287a879534825709ddaf530f808849"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li>
+	<p><span style="color:#FF8C00"><strong>works in real browsers</strong></span> (so you can even test on mobile ones)</p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p>supported by BrowserStack and CrossBrowserTesting</p>
+	</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>
+	<p>who uses it loves it 🙂 </p>
+
+	<p> </p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="6308438e0d029bb7e49c1c96942c9df4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><a href="https://devexpress.github.io/testcafe/" target="_blank"><strong>TestCafe</strong></a></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="eff19bef71d2899664148efbfce89f7f">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 144px;" data-block-id="f1b119d231df74060e27bdc1955c1b25"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2> </h2>
+
+<ul>
+	<li>Again, first of all: consider what and why you should test on mobile...</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>You can use the <span style="color:#FF8C00"><strong>device emulation</strong></span> of Chrome DevTools with Puppeteer</li>
+</ul>
+
+<p> </p>
+
+<ul>
+	<li>If you really need to test on real devices choose <span style="color:#FF8C00"><strong>TestCafe</strong></span>
+</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 107px;" data-block-id="08f1fe0a0f5832f29e166f0b8cd50c3f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><strong>What about mobile browsers?</strong></h3>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="bc806a2c39a3e1f2cc881ea62fe4a4f4">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="0580e231cb5ec1ff86f8e9c6ecc3939a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>If  you want to see the differences between <span style="color:#FF8C00"><strong>Puppeteer</strong></span>/<span style="color:#FF8C00"><strong>TestCafe</strong></span>/<span style="color:#FF8C00"><strong>Cypress</strong></span> you can take a look at a repository I made to solve an issue on StackOverflow:</p>
+
+<p> </p>
+
+<p><a href="https://github.com/NoriSte/stackoverflow-52383438-cypress-issue" target="_blank">https://github.com/NoriSte/stackoverflow-52383438-cypress-issue</a></p>
+</div></div>
+</section></section><section data-background-color="#ffffff" data-id="ad910a3ca6ffba084f3487fa39eea1cf">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="ea64ae6593db5b021875ab71aff76f5a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong>Are E2E tests framework-agnostic?</strong></h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 350px;" data-block-id="ee3f1b0f12e123b45e3b0ec7ae7195c0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Yes but every framework has (obviously) a lot of libraries to help you write them.</h3>
+</div></div>
+</section><section class="stack" data-id="dd13ccb76972179c89e5a2b6c7806c8e"><section data-background-color="#ffffff" data-id="f8f3f37f7b3f59adc1dd474fe2a6ddc3">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="7d1a8a2e22cd66e2bf08b3cd55bc4d63"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2><strong>What can I do with Puppeteer as well as test my web apps?</strong></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="e5ca158d0374b050b74b6b7a3fa504be">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="7511184bbe913ba13eaa432890bd6490"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Automate annoying and repetitive browser tasks.</h2>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 350px;" data-block-id="5eb484d3ed531773c7b9e30e65e9d0d4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>eg. We used it to configure a new website with ISPConfig.</h3>
+</div></div></section><section data-background-color="#ffffff" data-id="2e152020400ea4996205352e966d44a2">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="d8ccc180322f617160b84fa77f40814a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>
+<span style="color:#FF8C00"><strong>Scrape</strong></span> whatever you want from the browser (eg. data fetch without APIs).</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="9174941416411bdc4ff2c6b3be711d4f">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="f642686b94154014a2705c7a6f108fb9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Make self-contained Node.js apps with a UI (thank to <strong><a href="https://github.com/GoogleChromeLabs/carlo" target="_blank">Carlo</a></strong> by Google.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="0f2246d6547ab75cc9c794af73f259fd">
+
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="1d871c5df099dd7afa2085d1501f1a1e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Use it as <span style="color:#FF8C00"><strong>a development tool</strong></span>
+</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 280px;" data-block-id="e9e8a788edbcb3afb391288e48a825a2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>If you're developing a "change password" flow, for every change you make to the code you need to manually:</p>
+
+<p>• login</p>
+
+<p>• go to the profile page</p>
+
+<p>• fill the form to change the password</p>
+
+<p>• click logout</p>
+
+<p>• login with the new password</p>
+</div></div></section><section data-background-color="#ffffff" data-id="bcd0cef276c89e04c529aadc0dee746b">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="313b3eb9de90c7828404c2caa0d13b72"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Use it as <span style="color:#FF8C00"><strong>a development tool</strong></span>
+</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 280px;" data-block-id="af57f3b51482c2348e8189c963020b93"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Just to realize that you have a bug... Then fix it and start again...<br>
+<br>
+You could use Puppeteer to bring you directly at the end of the flow.</p>
+
+<p>And once you finished... Add some assertions and your E2E test is ready 😊</p>
+</div></div></section><section data-background-color="#ffffff" data-id="a76dc3309e95f6cb51a59749beba6e4b">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="7c5c1fd8c2f580694b614c76edbf0228"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h2>Use it while <span style="color:#FF8C00"><strong>studying</strong></span>
+</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 350px;" data-block-id="5762aed8d680855efd813c41594782d7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>When you're studying a new framework you don't know if you're breaking something you developed just some hours ago... unless you check it manually! Use some tests instead.</p>
+
+<p>Eg. I used them extensively during my first refactors while studying Vue.</p>
+</div></div></section></section><section class="stack" data-id="4da8c876fb2ef2e89db8f091c330c6f1"><section data-background-color="#ffffff" data-id="9b5bdaf5d1783348490179e88aea86e4">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 280px; height: auto;" data-block-id="1f27328d0e679c9622535ea91b9e6408"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p><span style="color:#FF8C00"><strong>Scrape the first 30 results</strong></span> from Google for the given query, have fun 😊</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="567bd8de6232f426d1544d41c110f9fd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Demo 6</strong></h1>
+</div></div></section><section data-background-color="#ffffff" data-id="62b0f99e29287a0e2e640e857ad02b53">
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 140px;" data-block-id="2cb54c855d8150821f155551e877e2fe"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Solution</strong></h1>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 800px; height: 160px; left: 80px; top: 270px;" data-block-id="06292ca6e705f007f855bbef0c07a100"><div class="sl-block-content notranslate" style="z-index: 13; font-size: 120%;" data-highlight-theme="monokai"><pre class="javascript"><code># TLDR
+$ open test-6.e2e.test.js</code></pre></div></div></section></section><section class="stack" data-id="91c5ac1df1cba32a8eedc7fc3a49bb10"><section data-background-color="#ffffff" data-id="9d356d102aad76ab0adbe77d20a42094">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="90230b252e8a03785bb7d2689ad317e8"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>Bonus track:</h2>
+
+<p> </p>
+
+<h2><span style="color:#FF8C00"><strong>Why is testing so important?</strong></span></h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="b13c9e3f78c7b4ecba51fc2974bddbc9">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="a61bab62734f0d2b6061e5dba8eb5506"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>It's useful to <span style="color:#FF8C00"><strong>find bugs</strong></span> and corner cases while coding.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="71c243e1ed3f08cb2c85537ffd098ed8">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 140px; height: auto;" data-block-id="4876830b3aede5f3c837a28f0f7215a1"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui" data-has-custom-html="">
+<h2>To <span style="color:#FF8C00;"><strong>avoid manually testing</strong> </span>ourselves  the same things over and over.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="216901c07a784c4aaa80ace98d8730d6">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="4bdcac90c1be6a0a3d350cf145aa9e06"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>To <span style="color:#FF8C00"><strong>avoid</strong></span> any kind of <span style="color:#FF8C00"><strong>regression</strong></span> while updating our (or others) code.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="83d24747dd9278ce2725e143f90d3bc8">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="4627cdead0df5f0dd5c63b4ddb84e34e"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>To <span style="color:#FF8C00"><strong>confidently</strong></span> release our code without worries.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="d4ab1bc3a2ac90e8a7a744b44c8d6d07">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="616ae25b995ef44ef5579862e47ed9b9"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>To <span style="color:#FF8C00"><strong>constantly check</strong></span> that our products are up and running.</h2>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="f70f78e26ab4c84a57197984267d9587">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="57b7005296860dc23793c52b226adcc3"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>In the end: testing is fundamental to sleep at night...</h2>
+</div></div>
+</section></section><section class="stack" data-id="b8e1f1a17c3899f1e0830151d188f0c6"><section data-background-color="#ffffff" data-id="6e64dd11b9bb6351e9ebe0007c4c59f9">
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="4043257dad29f271d566dcc6697eb778"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2>Bonus track:</h2>
+
+<p> </p>
+
+<h2><span style="color:#FF8C00"><strong>What kind of tests exist?</strong></span></h2>
+</div></div></section><section data-background-color="#ffffff" data-id="3c5abb376dd4da61abd8ae6a02f8f965">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="b30233f4653539f3c5db1e587d188b88"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>With UT you test functions, classes, in general everything you consider a "unit".</p>
+
+<p> </p>
+
+<p>You check the behaviour of your units with every kind of input they can receive.</p>
+
+<p> </p>
+
+<p>They say little about your code but they are <span style="color:#FF8C00"><strong>extremely fast</strong></span>, both to be written and to be run.</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="14710d6d3740c8016ce7fef3163a4bb5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><span style="color:#FF8C00"><strong>Unit tests</strong></span></h3>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="15713e9418fed4f7152ad295013c4323">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="a7399fff0e9d1bf8cf4d86ac75e95405"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>With Integration tests you test a <span style="color:#FF8C00"><strong>limited amount of units/components</strong></span> in a controlled environment.</p>
+
+<p> </p>
+
+<p>You check how they work together and they allow you to start seeing the bigger picture.</p>
+
+<p> </p>
+
+<p>Generally you mock (replace with fake but credible code) almost everything external to what you're focusing on.</p>
+
+<p> </p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="e0c0b27be6e6ef85f164c139a32cc0d6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><span style="color:#FF8C00"><strong>Integration tests</strong></span></h3>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="8f0dd6d1a41584dbcf16f9eb2c8094b1">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="3393ff510986f4e01c13fc66e9d4603a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>They test the <span style="color:#FF8C00"><strong>visual side</strong></span> of your web-app, they literally make a screenshot of your page and compare every pixel with the previous one.</p>
+
+<p> </p>
+
+<p>They are extremely slow and they are almost dedicated to test CSS side of your project. </p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="0c7020f8c459c3f51dc9e47f3e9294b0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><span style="color:#FF8C00"><strong>Regression tests</strong></span></h3>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="a24b71e66d6cdea205024e677035914a"><div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 70px; height: auto;" data-block-id="44838b00609cd2aa33b3af094151c1de"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h3>
+<span style="color:#FF8C00"><strong>Funny moment</strong></span>: a GIF I found while studying for this workshop 😁</h3>
+</div></div>
+
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-block-id="15a05ad9ee69ed1a5a0b29e428beb8d1" style="min-width: 4px; min-height: 4px; width: 434px; height: 326px; left: 240px; top: 190px;"><div class="sl-block-content" style="z-index: 13;"><img style="" data-natural-width="480" data-natural-height="360" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/caca5ce2af7ab1c1e294eeb7704f8209.gif"></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 552px; height: auto;" data-block-id="9fe343996fbca132ab428c4109c06a79"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 14; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>The goal of the author was to tease the unit testers to introduce them about the need for E2E testing.</p>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="5028604fdc2950d0cc05cf03167cb5da">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 782px; left: 80px; top: 210px;" data-block-id="5fbccb6a1362d31cbc56c3fcca85eced"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>We are now experts 💪😁</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="531b12e79fddf4a8c89f3854725b0bb9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><span style="color:#FF8C00"><strong>End-to-end tests</strong></span></h3>
+</div></div>
+</section><section data-id="3f7b2633da4bcc14a74cde49f7b3ecda" data-background-color="#ffffff">
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="cf317dc81508ec0f8de69ff534e984e2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3><strong>The testing pyramid</strong></h3>
+</div></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 960px; height: 536px; left: 0px; top: 152px;" data-block-id="9bc06b306e6db882846de338ecac6e7a"><div class="sl-block-content" style="z-index: 13;"><img style="" data-natural-width="1250" data-natural-height="698" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/35f1756953c0089a17b75b99060e7bbb.png"></div></div>
+</section><section data-background-color="#ffffff" data-id="e7f345d27cefe7dfbf36972f828672c2"><div class="sl-block" data-block-type="iframe" data-block-id="79396e8f89d783f1053eb161553ec8cc" style="min-width: 30px; min-height: 30px; width: 360px; height: 300px; left: 300px; top: 200px;"><div class="sl-block-content" style="z-index: 13;"><iframe webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" sandbox="allow-forms allow-scripts allow-popups allow-same-origin allow-pointer-lock" data-src='&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;&amp;quot;The Testing Trophy&amp;quot; 🏆&lt;br&gt;&lt;br&gt;A general guide for the **return on investment** 🤑 of the different forms of testing with regards to testing JavaScript applications.&lt;br&gt;&lt;br&gt;- End to end w/ &lt;a href="https://twitter.com/Cypress_io?ref_src=twsrc%5Etfw"&gt;@Cypress_io&lt;/a&gt; ⚫️&lt;br&gt;- Integration &amp;amp; Unit w/ &lt;a href="https://twitter.com/fbjest?ref_src=twsrc%5Etfw"&gt;@fbjest&lt;/a&gt; 🃏&lt;br&gt;- Static w/ &lt;a href="https://twitter.com/flowtype?ref_src=twsrc%5Etfw"&gt;@flowtype&lt;/a&gt; 𝙁 and &lt;a href="https://twitter.com/geteslint?ref_src=twsrc%5Etfw"&gt;@geteslint&lt;/a&gt; ⬣ &lt;a href="https://t.co/kPBC6yVxSA"&gt;pic.twitter.com/kPBC6yVxSA&lt;/a&gt;&lt;/p&gt;&amp;mdash; Kent C. Dodds (@kentcdodds) &lt;a href="https://twitter.com/kentcdodds/status/960723172591992832?ref_src=twsrc%5Etfw"&gt;February 6, 2018&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;'></iframe></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="6550a5a52fe7d892a826fa2a6ec2188e" style="min-width: 4px; min-height: 4px; width: 383px; height: 388px; left: 291px; top: 226px;"><a class="sl-block-content" style="z-index: 14;" href="https://twitter.com/kentcdodds/status/960723172591992832/photo/1?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E960723172591992832&amp;ref_url=https%3A%2F%2Fblog.kentcdodds.com%2Fmedia%2F8417946d2d96f984d9eec36afc3ed94f%3FpostId%3D5e8c7fff591c" target="_blank"><img style="" data-natural-width="679" data-natural-height="688" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/18e523a67eede0de25487ef8026ce4b1.jpg"></a></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="93fe42b803eaa96a61df0847a26332f0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h3>Kent C. Dodds's <span style="color:#FF8C00"><strong>return of investment</strong></span> testing "pyramid"</h3>
+</div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="93716d274e2ff20d21b789201b522354" style="min-width: 4px; min-height: 4px; width: 415px; height: 420px; left: 275px; top: 210px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgb(255, 255, 255)" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 415 420"><rect width="415" height="420" rx="0" ry="0" class="shape-element" fill="rgb(255, 255, 255)"></rect></svg></div></div>
+</section><section data-background-color="#ffffff" data-id="41981af1a14680fec67bd40b26f042cd">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="03ead12b6bc9d3dc6d61c87780b96ada"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2><strong>Always use the simplest kind of test</strong></h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 350px;" data-block-id="fc5faf35033203d8fbc3d45a4d540785"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<p>Never write an E2E test to test something you can test with an Integration one... And never write an Integration test if you can get the same result with an Unit one.</p>
+</div></div>
+</section></section><section class="stack" data-id="65ca58bff0b4ec67a7fd64389afa5206"><section data-background-color="#ffffff" data-id="c5a2a1536e85590e1ce64f7958ff2b82">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 210px; height: auto;" data-block-id="dd8b969c58bd8ad78a51ac7b3ebe3dbc"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>• <span style="color:#FF8C00"><strong>E2E tests</strong></span> really matter, they don't know anything about your architecture, they <span style="color:#FF8C00"><strong>test what the end user sees</strong></span></p>
+
+<p> </p>
+
+<p>• they’re quite easy to develop, with a flat learning curve</p>
+
+<p> </p>
+
+<p>• write a <span style="color:#FF8C00"><strong>few amount of tests</strong></span>, don't delegate to E2E testing something you can test with other testing methodologies</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="65deab02172001e8152f00d877c1ec88"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Conclusion</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="3035b668d608a1b16bdad0e8321dd94b">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 210px; height: auto;" data-block-id="058621849552b11511773f052bf40ba5"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left; color: rgb(0, 0, 0);" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p style="color:rgb(255, 255, 255)"><span style="color:#000000">• remember to </span><span style="color:#FF8C00"><strong>take the tests simple</strong></span><span style="color:#000000">, they could be extremely time-consuming</span></p>
+
+<p style="color:rgb(255, 255, 255)"> </p>
+
+<p style="color:rgb(255, 255, 255)"><span style="color:#000000">• never "sleep" the browser</span></p>
+
+<p style="color:rgb(255, 255, 255)"> </p>
+
+<p style="color:rgb(255, 255, 255)"><span style="color:#000000">• use "</span><span style="color:#FF8C00"><strong>data-test</strong></span><span style="color:#000000">"/"</span><span style="color:#FF8C00"><strong>data-testid</strong></span><span style="color:#000000">" attributes</span></p>
+
+<p style="color:rgb(255, 255, 255)"> </p>
+
+<p style="color:rgb(255, 255, 255)"><span style="color:#000000">• remember that you can scrape/execute whatever you want on the web with an automated browser</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="19b3bff4148f6a62f529687acf64daa1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Conclusion</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="280636e7aefa20b7d94c554aa114161f">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 210px; height: auto;" data-block-id="da0e6e0c4c3fa73e42c5c4bf99a1f67f"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p style="color:rgb(255, 255, 255)">• <a href="https://puppeteersandbox.com" target="_blank">https://puppeteersandbox.com</a></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="63108b968c6348daf4d2b7822831e6e5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1><strong>Playground</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="b76f0266154931083e45da1a0852fbc6">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 190px; height: auto;" data-block-id="ae708ffd79883770016f8d4a657d251a"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left; font-size: 50%;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre>• <a href="https://www.blazemeter.com/blog/top-15-ui-test-automation-best-practices-you-should-follow" target="_blank">https://www.blazemeter.com/blog/top-15-ui-test-automation-best-practices-you-should-follow</a>
+
+• <a href="https://medium.freecodecamp.org/why-end-to-end-testing-is-important-for-your-team-cb7eb0ec1504" target="_blank">https://medium.freecodecamp.org/why-end-to-end-testing-is-important-for-your-team-cb7eb0ec1504</a>
+
+• <a href="https://blog.kentcdodds.com/write-tests-not-too-many-mostly-integration-5e8c7fff591c" target="_blank">https://blog.kentcdodds.com/write-tests-not-too-many-mostly-integration-5e8c7fff591c</a>
+
+• <a href="https://hackernoon.com/testing-your-frontend-code-part-iii-e2e-testing-e9261b56475" target="_blank">https://hackernoon.com/testing-your-frontend-code-part-iii-e2e-testing-e9261b56475</a>
+
+• <a href="https://gojko.net/2010/04/13/how-to-implement-ui-testing-without-shooting-yourself-in-the-foot-2/" target="_blank">https://gojko.net/2010/04/13/how-to-implement-ui-testing-without-shooting-yourself-in-the-foot-2/</a>
+
+• <a href="https://willowtreeapps.com/ideas/how-to-get-the-most-out-of-ui-testing" target="_blank">https://willowtreeapps.com/ideas/how-to-get-the-most-out-of-ui-testing</a>
+
+• <a href="http://www.softwaretestingmagazine.com/knowledge/graphical-user-interface-gui-testing-best-practices/" target="_blank">http://www.softwaretestingmagazine.com/knowledge/graphical-user-interface-gui-testing-best-practices/</a>
+
+• <a href="https://www.slideshare.net/Codemotion/codemotion-webinar-protractor" target="_blank">https://www.slideshare.net/Codemotion/codemotion-webinar-protractor</a>
+
+• <a href="https://frontendmasters.com/courses/testing-javascript/introducing-end-to-end-testing/" target="_blank">https://frontendmasters.com/courses/testing-javascript/introducing-end-to-end-testing/</a>
+
+• <a href="https://medium.com/welldone-software/an-overview-of-javascript-testing-in-2018-f68950900bc3" target="_blank">https://medium.com/welldone-software/an-overview-of-javascript-testing-in-2018-f68950900bc3</a>
+
+• <a href="https://medium.com/yld-engineering-blog/evaluating-cypress-and-testcafe-for-end-to-end-testing-fcd0303d2103" target="_blank">https://medium.com/yld-engineering-blog/evaluating-cypress-and-testcafe-for-end-to-end-testing-fcd0303d2103</a> </pre>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 70px;" data-block-id="8322accb171c3b172306fd7cf53452f1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h1><strong>Sources</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="e51bf90e9e1515d3120ad370d2da9b73">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 280px; height: auto;" data-block-id="f1e5baa0cc87893e80dd8aa4271508b7"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left; font-size: 50%;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><span style="font-size:1.4em">• <a href="https://egghead.io/courses/end-to-end-testing-with-google-s-puppeteer-and-jest" target="_blank">https://egghead.io/courses/end-to-end-testing-with-google-s-puppeteer-and-jest</a></span>
+
+
+
+<span style="font-size:1.4em">• <a href="https://egghead.io/courses/end-to-end-testing-with-cypress" target="_blank">https://egghead.io/courses/end-to-end-testing-with-cypress</a></span></pre>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="0d3f1abc9d29c6944a592d2056916993"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left; color: rgb(255, 153, 0);" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h1><strong>Egghead courses</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="82dd8f47daf7d6ad066242a3a8b50743">
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 384px; height: auto;" data-block-id="849ead2ee94c9a77fcd7bc811d04056c"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 12; text-align: left;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<pre><span style="font-size:1.0em">• </span><a href="https://testingjavascript.com/" target="_blank">https://testingjavascript.com/</a></pre>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="1e5ccf3cf8b5190ea9fa835f9b32c545"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h1><strong><span style="color:#FF8C00">Kent's course </span>(reccomended)</strong></h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="aac66a98363ef0108e079fb547587f37">
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 800px; left: 80px; top: 140px;" data-block-id="95ee079cccfe61663010c859235b503d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(255, 153, 0); text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h1><strong>Any feedbacks??</strong></h1>
+</div></div>
+</section></section><section class="stack" data-id="f55f1a51392ab9e90daa817b5ec5460c"><section data-background-color="#ffffff" data-id="675224cce2124d06f0cf4e54762e8aa3">
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 210px;" data-block-id="a870d4a5ba76efc34a1425996e295538"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>• <span style="color:#FF8C00"><strong>CaFE</strong></span> and <span style="color:#FF8C00"><strong>Giacomo Zinetti</strong></span></p>
+
+<p> </p>
+
+<p>• <a href="http://gdscom.it/it/" target="_blank"><strong>GDS Communication</strong></a> for the amazing location</p>
+
+<p> </p>
+
+<p>• <span style="color:#FF8C00"><strong>Kent C. Dodds</strong></span> for the amazing “Solidifying what you learn” post</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 70px;" data-block-id="2255e2a465ddef70a99a06793ede927f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1>A <span style="color:#FF8C00"><strong>special thank</strong></span> to:</h1>
+</div></div>
+</section><section data-background-color="#ffffff" data-id="e667a3212d23a83f366ad0cdf00633d7">
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 140px;" data-block-id="245e38136b079ac3c8f1c74fcc60d18d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1>Last but not least:</h1>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 720px; left: 80px; top: 280px;" data-block-id="da2c3a1c62c3faa0eac426b4fb2bd0d3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; text-align: left;" data-gramm_id="cbe58bc1-2232-691a-2522-5536f18925f6" data-gramm="true" data-gramm_editor="true">
+<h1>"<span style="color:#FF8C00">Share to learn</span>" really works!</h1>
+</div></div></section></section><section data-background-color="#ffffff" data-id="5228fa387214a6057679e32cc97c5cdc">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 202px; left: 77px; top: 40px;" data-block-id="5a81e619661415c8ae309f21e924bf96"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p style="text-align:left"><span style="font-size:1.0em">Organised by:</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 202px; left: 678px; top: 40px;" data-block-id="91a073c523610be8eec4f74966e06b37"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17; text-align: right;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p><span style="font-size:1.0em">Hosted by:</span></p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 202px; left: 678px; top: 549px;" data-block-id="041266451b35bcb83215236f9bdd08c2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17; text-align: right;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p>13/03/2019</p>
+</div></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 210px; height: 89px; left: 80px; top: 70px;" data-block-id="a9e9d375530317aae443c9f07569744e"><a class="sl-block-content" style="z-index: 15;" href="https://www.meetup.com/it-IT/Como-and-Frontend-CaFE/" target="_blank"><img data-natural-width="624" data-natural-height="265" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/d33138493da9189a3306655c9d942399.jpg"></a></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 194px; height: 64px; left: 686px; top: 76px;" data-block-id="3a3f2ba37a03f9047f886b9a216ac88f"><a class="sl-block-content" style="z-index: 16;" href="https://gdscom.it/it/" target="_blank"><img data-natural-width="1024" data-natural-height="338" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/8b41f8190d8d63bf74ab80de58569fd1.png"></a></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 200px; height: 69px; left: 456px; top: 521px;" data-block-id="396ec26dfa206eb74809afd266f3686a"><a class="sl-block-content" style="z-index: 18;" href="https://conio.com" target="_blank"><img data-natural-width="800" data-natural-height="276" style="" data-lazy-loaded="" data-src="e2e-testing-workshop-cafe/41b9aee2514ac9d876c6b4a0c92e9c8e.svg"></a></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 159px; height: 159px; left: 400px; top: 476px;" data-block-id="3bc20acbdcbd3b740e35f400b2ed332f"><a class="sl-block-content" data-shape-type="circle" data-shape-fill-color="rgb(15, 192, 120)" data-shape-stretch="true" style="z-index: 17;" href="https://conio.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 159 159"><ellipse rx="79.5" ry="79.5" cx="79.5" cy="79.5" class="shape-element" fill="rgb(15, 192, 120)"></ellipse></svg></a></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 261px; left: 80px; top: 526px;" data-block-id="975511a374e804b33efe46f4b6be8b03"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19; color: rgb(0, 0, 0); font-size: 70%; line-height: 1.17;" data-gramm_id="355066f3-366d-2ffc-5e07-d584566a29c9" data-gramm="true" data-gramm_editor="true" data-has-line-height="">
+<p style="text-align:left">Stefano Magni (<a href="https://twitter.com/NoriSte" target="_blank">@NoriSte</a>)</p>
+
+<p style="text-align:left">Front-end Developer for</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 236px; height: auto;" data-block-id="722dc2d64279fa408501140f50c85664"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="color: rgb(15, 192, 120); z-index: 20; text-align: center;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<h2><strong>Thank you!</strong></h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 329px; height: auto;" data-block-id="b04ebf59da022b6bc5a810821a17a019"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 21; text-align: center; font-size: 80%;" data-gramm_id="000789c8-d0c4-8dda-fa84-793d92193fc2" data-gramm="true" data-gramm_editor="true" dir="ui">
+<p>The repository with the code and the link to these slides</p>
+
+<pre><a href="https://github.com/NoriSte/cafe-meetup-e2e-testing-with-puppeteer" target="_blank">https://github.com/NoriSte/cafe-meetup-e2e-testing-with-puppeteer</a></pre>
+</div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":1450028,"slug":"e2e-testing-workshop-cafe","title":"E2E testing meetup for CaFE","description":"In March 2019 I had a talk for the CaFE community in Como (https://www.meetup.com/it-IT/Como-and-Frontend-CaFE/events/259556783/). The talk aimed to introduce the attendees to the amazing world of browser automation, mostly for E2E testing but some showed examples were about web scraping too.","width":960,"height":700,"visibility":"all","published_at":"2019-03-09T16:10:31.518Z","sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/cbe2dc47d02d9240f591f2a4a663e240/thumb.jpg?1552155121","view_count":189,"user":{"id":916090,"username":"noriste","name":"Stefano Magni","description":"I'm a passionate JavaScript developer.\r\nI love creating high-quality products, testing and automating everything, learning and sharing my knowledge, helping people.\r\nI work for Conio, a bitcoin/blockchain startup.","thumbnail_url":"https://www.gravatar.com/avatar/9a3c8e5129a4016531df9fc63ffccdf6?s=140\u0026d=https%3A%2F%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png","paid":true,"pro":true,"lite":false,"team_id":null,"settings":{"id":1714887,"present_controls":true,"present_upsizing":true,"present_pointer":false,"present_notes":true,"default_deck_tag_id":null}},"background_transition":"slide","transition":"slide","theme_id":null,"theme_font":"montserrat","theme_color":"silver-green","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":true,"rolling_links":false,"center":false,"shuffle":false,"should_loop":false,"share_notes":false,"slide_number":false,"slide_count":154,"rtl":false,"version":2,"collaborative":false,"deck_user_editor_limit":3,"data_updated_at":1554709657666,"font_typekit":null,"font_google":null,"time_limit":null,"upsizing_enabled":true,"notes":{"b0a408670a4fa93f342024658b93493b":"","de78edd5dec36b218ab7e742da2e4c31":"Is it time for a break? :)","9ae28351387448b59644f0ba352ed534":"","a73baa3badcf6bf0d78980a5d3c11e8f":"Lunch break?","9d356d102aad76ab0adbe77d20a42094":"","6e64dd11b9bb6351e9ebe0007c4c59f9":"","3f7b2633da4bcc14a74cde49f7b3ecda":"","c64b43a450337a1de0bf795068187ed6":"","bb73e31205bcc54107aa8dc9f9358afe":"","4e5d5e842595f67f122c6a7caefa730c":"","0016c026f8cc4dfc4abcb74be29c656c":"","28cef026f3eb4e8e938077690b9134f8":"","4c89d6aa43e469cb2603d6c074c8708c":"","d29f61c1f680e1aaf0a2fb3283ff9241":"","16ed058b895290c0675314c0e2d5eca9":"","c476f410f31ffc6df9b61d0643a44fd3":"","ec6eed774fe999b078d40aa2dfb7ff7d":"","2a4d3a9c9abeb26de24c3fc7cc038929":"","005219139a757192c31d90b5bb15d8af":"","75e68f7619d832e987c0c1cbcc1df15c":"","fda5845fbf501ff4c43ef0b88bcc683c":"","c54bacfe8fb550963154ddd3a189bff6":"","5e1dabae7c353a1155ee18b87bc78c65":"","47a48379b37e2b3b070728b37f7dcb30":"","95f39b368f3a3e6bf5ab08e3bd70ada4":"","f280ccffa2a6c25be43a073ec6570f2a":"","b0065f2ff5d9dbde98796dc8246ef270":"","ad910a3ca6ffba084f3487fa39eea1cf":"","f8f3f37f7b3f59adc1dd474fe2a6ddc3":"","9b5bdaf5d1783348490179e88aea86e4":"","c5a2a1536e85590e1ce64f7958ff2b82":"","858d8075821b9edebccbc37ea774ed49":"","675224cce2124d06f0cf4e54762e8aa3":"","5228fa387214a6057679e32cc97c5cdc":"","3035b668d608a1b16bdad0e8321dd94b":"","b76f0266154931083e45da1a0852fbc6":"","280636e7aefa20b7d94c554aa114161f":""}}};
+
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/reveal.min.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 960,
+				height: 700,
+				margin: 0.05,
+				
+
+				hash: true,
+				controls: true,
+				progress: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: false,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				center: false,
+				shuffle: false,
+				loop: false,
+				rtl: false,
+
+				transition: "slide",
+				backgroundTransition: "slide",
+
+				highlight: {
+					escapeHTML: false
+				},
+
+				dependencies: [
+					{ src: 'lib/reveal-plugins/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/highlight/highlight.js' },
+					{ src: 'lib/reveal-plugins/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'lib/reveal-plugins/zoom/zoom.js', async: true }
+				]
+			});
+		</script>
+
+		
+
+	</body>
+</html>
